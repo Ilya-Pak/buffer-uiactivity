@@ -3,6 +3,13 @@ Buffer UIActivity
 
 A UIActivity for [Buffer](http://bufferapp.com). Add this UIActivity to your UIActivityViewController to allow users to post to Buffer.
 
+## Getting Started
+
+1. Include all of the Buffer UIActivity Files along with its dependencies.
+2. [Create a Buffer app](http://bufferapp.com/developers/apps/create).
+3. Insert the Cliend ID and Client Secret into BufferSheetViewController.m.
+4. Load the UIActivityViewController like the example below with BufferUIActivity in the applicationActivities array.
+
 ## Example Usage
 
     BufferUIActivity *bufferActivity = [[BufferUIActivity alloc] init];
