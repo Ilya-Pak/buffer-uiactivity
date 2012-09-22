@@ -21,9 +21,9 @@
     
     NSString *params = @"";
     if(now){
-        params = [NSString stringWithFormat:@"text=%@&now=1&shorten=0&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
+        params = [NSString stringWithFormat:@"text=%@&now=1&shorten=true&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
     } else {
-        params = [NSString stringWithFormat:@"text=%@&shorten=0&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
+        params = [NSString stringWithFormat:@"text=%@&shorten=true&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
