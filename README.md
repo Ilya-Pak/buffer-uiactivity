@@ -3,6 +3,8 @@ Buffer UIActivity
 
 A UIActivity for [Buffer](http://bufferapp.com). Add this UIActivity to your UIActivityViewController to allow users to post to Buffer.
 
+![Buffer UIActivity](http://www.andydev.co.uk/wp-content/uploads/2012/09/iOS-Simulator-Screen-shot-22-Sep-2012-14.12.41.png)
+
 ## Getting Started
 
 1. Include all of the Buffer UIActivity Files along with its dependencies.
