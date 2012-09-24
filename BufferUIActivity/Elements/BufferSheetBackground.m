@@ -54,6 +54,7 @@
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.sheetBackgroundView.frame = self.bounds;
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
 }
 
 @end
