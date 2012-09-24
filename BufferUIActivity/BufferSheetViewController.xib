@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
+		<string key="IBDocument.SystemVersion">12C54</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">1926</string>
@@ -262,7 +262,7 @@
 					</object>
 					<object class="IBUIView" id="439866158">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIView" id="113909267">
 								<reference key="NSNextResponder" ref="439866158"/>
@@ -414,7 +414,7 @@
 									</object>
 									<object class="IBUIView" id="596503128">
 										<reference key="NSNextResponder" ref="113909267"/>
-										<int key="NSvFlags">292</int>
+										<int key="NSvFlags">-2147483356</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="IBUIView" id="570735464">
 												<reference key="NSNextResponder" ref="596503128"/>
@@ -445,7 +445,7 @@
 									</object>
 									<object class="IBUIView" id="273504162">
 										<reference key="NSNextResponder" ref="113909267"/>
-										<int key="NSvFlags">292</int>
+										<int key="NSvFlags">-2147483356</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="IBUIView" id="480577285">
 												<reference key="NSNextResponder" ref="273504162"/>
@@ -476,7 +476,7 @@
 									</object>
 									<object class="IBUIView" id="168510445">
 										<reference key="NSNextResponder" ref="113909267"/>
-										<int key="NSvFlags">292</int>
+										<int key="NSvFlags">-2147483356</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="IBUIView" id="755254660">
 												<reference key="NSNextResponder" ref="168510445"/>
@@ -509,7 +509,7 @@
 									<object class="IBUIButton" id="530430608">
 										<reference key="NSNextResponder" ref="113909267"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{9, 43}, {57, 52}}</string>
+										<string key="NSFrame">{{9, 37}, {57, 58}}</string>
 										<reference key="NSSuperview" ref="113909267"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="596503128"/>
@@ -954,11 +954,6 @@
 						<string key="objectName">Buffer Profile Selection</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">124</int>
-						<reference key="object" ref="858723840"/>
-						<reference key="parent" ref="53798454"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">93</int>
 						<reference key="object" ref="977008498"/>
 						<reference key="parent" ref="53798454"/>
@@ -1102,6 +1097,11 @@
 						<reference key="object" ref="515534012"/>
 						<reference key="parent" ref="566905764"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">124</int>
+						<reference key="object" ref="858723840"/>
+						<reference key="parent" ref="53798454"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1202,17 +1202,12 @@
 					<string key="className">BufferSheetViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addToBuffer:">id</string>
-						<string key="cancel:">id</string>
+						<string key="errorDismissed:">id</string>
 						<string key="toggleProfileSelection:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addToBuffer:">
-							<string key="name">addToBuffer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
+						<object class="IBActionInfo" key="errorDismissed:">
+							<string key="name">errorDismissed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleProfileSelection:">

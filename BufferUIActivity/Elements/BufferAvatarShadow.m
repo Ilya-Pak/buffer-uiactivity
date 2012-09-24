@@ -15,6 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self drawBufferAvatarShadow];
+        self.opaque = YES;
     }
     return self;
 }

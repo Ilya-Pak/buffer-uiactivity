@@ -40,6 +40,7 @@
 - (void)bufferSheetTextViewInit {    
     self.backgroundColor = [UIColor clearColor];
     self.contentMode = UIViewContentModeRedraw;
+    self.opaque = YES;
     
     self.rowHeight = 19.0f;
     self.lineWidth = 1.0f;

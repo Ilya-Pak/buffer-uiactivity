@@ -34,6 +34,8 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: bufferSheetViewController];
 
+    navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     return navController;
 }
 

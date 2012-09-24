@@ -24,14 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithRed:37.0/255.0f green:37.0/255.0f blue:37.0/255.0f alpha:1.0];
+    bufferSheetContainer.frame = CGRectMake(0, 400, 320, 245);
+    [bufferProfileSelectionView setHidden:YES];
     
     bufferTextView.backgroundColor = [UIColor clearColor];
     
     [bufferTextView becomeFirstResponder];
     
     profileSelectionActive = YES;
-    
     
     bufferCache = [[CachingMethods alloc] init];
     
@@ -49,11 +49,25 @@
     } else {
         [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
+    
+    [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = TRUE;
-    self.view.backgroundColor = [UIColor colorWithRed:37.0/255.0f green:37.0/255.0f blue:37.0/255.0f alpha:0.7];
+}
+
+-(void)animateSheetIn {
+    [bufferSheetContainer setHidden:NO];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        bufferSheetContainer.frame = CGRectMake(0, 0, 320, 245);
+    } completion:^(BOOL finished) {
+        [bufferProfileSelectionView setHidden:NO];
+        [avatar1Container setHidden:NO];
+        [avatar2Container setHidden:NO];
+        [avatar3Container setHidden:NO];
+    }];
 }
 
 

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		94000DD11607551100E432DD /* BufferSheetBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DD01607551100E432DD /* BufferSheetBackground.m */; };
 		94000DD816076DF900E432DD /* BufferSheetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DD716076DF900E432DD /* BufferSheetButton.m */; };
-		94000DDC1607704100E432DD /* BufferSheetTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DDB1607704100E432DD /* BufferSheetTheme.m */; };
 		94000DDF160770E200E432DD /* BufferSheetLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 94000DDD160770E200E432DD /* BufferSheetLogo.png */; };
 		94000DE0160770E200E432DD /* BufferSheetLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94000DDE160770E200E432DD /* BufferSheetLogo@2x.png */; };
 		94000DE31607717B00E432DD /* BufferSheetButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94000DE11607717B00E432DD /* BufferSheetButton.png */; };
@@ -100,8 +99,6 @@
 		94000DD01607551100E432DD /* BufferSheetBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetBackground.m; sourceTree = "<group>"; };
 		94000DD616076DF900E432DD /* BufferSheetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetButton.h; sourceTree = "<group>"; };
 		94000DD716076DF900E432DD /* BufferSheetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetButton.m; sourceTree = "<group>"; };
-		94000DDA1607704100E432DD /* BufferSheetTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetTheme.h; sourceTree = "<group>"; };
-		94000DDB1607704100E432DD /* BufferSheetTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetTheme.m; sourceTree = "<group>"; };
 		94000DDD160770E200E432DD /* BufferSheetLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BufferSheetLogo.png; path = ../Elements/BufferSheetLogo.png; sourceTree = "<group>"; };
 		94000DDE160770E200E432DD /* BufferSheetLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BufferSheetLogo@2x.png"; path = "../Elements/BufferSheetLogo@2x.png"; sourceTree = "<group>"; };
 		94000DE11607717B00E432DD /* BufferSheetButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BufferSheetButton.png; path = ../Elements/BufferSheetButton.png; sourceTree = "<group>"; };
@@ -245,8 +242,6 @@
 		94000DCE160750C100E432DD /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				94000DDA1607704100E432DD /* BufferSheetTheme.h */,
-				94000DDB1607704100E432DD /* BufferSheetTheme.m */,
 				94000DCF1607551100E432DD /* BufferSheetBackground.h */,
 				94000DD01607551100E432DD /* BufferSheetBackground.m */,
 				94000DD616076DF900E432DD /* BufferSheetButton.h */,
@@ -664,7 +659,6 @@
 				9478857215FF282A00F360D9 /* GTMHTTPFetcherLogging.m in Sources */,
 				94000DD11607551100E432DD /* BufferSheetBackground.m in Sources */,
 				94000DD816076DF900E432DD /* BufferSheetButton.m in Sources */,
-				94000DDC1607704100E432DD /* BufferSheetTheme.m in Sources */,
 				94000DF11607990F00E432DD /* BufferAvatarShadow.m in Sources */,
 				94000DF41607997300E432DD /* BufferAvatarView.m in Sources */,
 				94000E011608605800E432DD /* BufferSheetTextView.m in Sources */,
