@@ -7,7 +7,6 @@
 //
 
 #import "BufferSheetViewController.h"
-#import "BufferSheetTheme.h"
 #import "ProfilesService.h"
 #import "PostUpdateService.h"
 #import "UIImageView+AFNetworking.h"
@@ -24,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [BufferSheetTheme customizeBufferSheet];
     
     self.view.backgroundColor = [UIColor colorWithRed:37.0/255.0f green:37.0/255.0f blue:37.0/255.0f alpha:1.0];
     
