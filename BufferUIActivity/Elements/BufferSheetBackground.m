@@ -39,6 +39,9 @@
     self.layer.shadowOpacity = 1.0f;
     self.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
     self.layer.shadowRadius = 5.0f;
+    self.layer.shouldRasterize = YES;
+    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
     
     self.sheetBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.sheetBackgroundView.layer.masksToBounds = YES;
@@ -50,7 +53,6 @@
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    
     self.sheetBackgroundView.frame = self.bounds;
 }
 
