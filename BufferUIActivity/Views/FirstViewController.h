@@ -11,6 +11,7 @@
 
 @interface FirstViewController : UIViewController
 
--(IBAction)onButtonClick:(id)sender;
+-(IBAction)openUIActivityView:(id)sender;
+-(IBAction)openBufferSheet:(id)sender;
 
 @end

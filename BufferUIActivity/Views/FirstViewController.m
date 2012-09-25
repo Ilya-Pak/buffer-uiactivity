@@ -8,6 +8,7 @@
 
 #import "FirstViewController.h"
 #import "BufferUIActivity.h"
+#import "BufferSheetViewController.h"
 
 @interface FirstViewController ()
 
@@ -35,7 +36,7 @@
 
 
 
--(IBAction)onButtonClick:(id)sender {
+-(IBAction)openUIActivityView:(id)sender {
     NSString *text = @"Hello world";
     NSString *url = @"http://bufferapp.com";
     
@@ -49,6 +50,21 @@
     [self presentViewController:activityView animated:YES completion:^{
         
     }];
+}
+
+
+-(IBAction)openBufferSheet:(id)sender {
+    NSString *text = @"Hello world http://bufferapp.com";
+    
+    BufferSheetViewController *bufferSheet = [[BufferSheetViewController alloc] init];
+    
+    bufferSheet.bufferTextCopy = text;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: bufferSheet];
+    
+    navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 
