@@ -47,7 +47,4 @@
     self.activityBufferItem = activityItems;
 }
 
-- (void)activityDidFinish:(BOOL)completed {    
-}
-
 @end
