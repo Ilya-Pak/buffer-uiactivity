@@ -460,7 +460,9 @@
 }
 
 -(void)updatePosted {
-    [bufferUIActivityDelegate activityDidFinish:YES];
+    if([bufferUIActivityDelegate respondsToSelector: @selector(activityDidFinish:)]){
+        [bufferUIActivityDelegate activityDidFinish:YES];
+    }
     [self dismissViewControllerAnimated:TRUE completion:^{}];
 }
 
@@ -511,7 +513,9 @@
 
 -(IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    [bufferUIActivityDelegate performSelector:@selector(activityDidFinish:) withObject:NO];
+    if([bufferUIActivityDelegate respondsToSelector: @selector(activityDidFinish:)]){
+        [bufferUIActivityDelegate activityDidFinish:YES];
+    }
 }
 
 #pragma mark - Orientation Changes
