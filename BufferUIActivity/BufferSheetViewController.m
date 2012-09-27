@@ -460,6 +460,7 @@
 }
 
 -(void)updatePosted {
+    [bufferUIActivityDelegate activityDidFinish:YES];
     [self dismissViewControllerAnimated:TRUE completion:^{}];
 }
 
