@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    bufferSheetContainer.frame = CGRectMake(0, 400, 320, 245);
     [bufferProfileSelectionView setHidden:YES];
     
     bufferTextView.backgroundColor = [UIColor clearColor];
@@ -51,6 +50,7 @@
     }
     
     [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -523,6 +523,8 @@
 }
 
 -(void)rotateViewWithOrientation:(UIInterfaceOrientation)orientation {
+    bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 245);
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         if(UIInterfaceOrientationIsPortrait(orientation)){
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 25,  500, 190);
