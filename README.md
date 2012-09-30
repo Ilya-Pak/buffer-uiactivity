@@ -18,7 +18,13 @@ A UIActivity for [Buffer](http://bufferapp.com). Add this UIActivity to your UIA
     
     UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:@[@"Hello world.", @"http://bufferapp.com"] applicationActivities:@[ bufferActivity ]];
     
-    [self presentViewController:activityView animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityView animated:YES completion:nil];
+    } else {
+        self.popup = [[UIPopoverController alloc] initWithContentViewController:activityView];
+        [self.popup presentPopoverFromRect:yourButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    
     
 ## Example Usage - Standalone
 
