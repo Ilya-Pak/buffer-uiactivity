@@ -37,6 +37,7 @@
 
 
 -(IBAction)openUIActivityView:(id)sender {
+    
     NSString *text = @"Hello world";
     NSString *url = @"http://bufferapp.com";
     
@@ -47,9 +48,17 @@
     
     UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:@[ bufferActivity ]];
     
-    [self presentViewController:activityView animated:YES completion:^{
-        
-    }];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityView animated:YES completion:^{
+            
+        }];
+    } else {
+        // Change Rect to position Popover
+        self.popup = [[UIPopoverController alloc] initWithContentViewController:activityView];
+        [self.popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width/2, self.view.frame.size.width/2, 100, 100) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    
 }
 
 

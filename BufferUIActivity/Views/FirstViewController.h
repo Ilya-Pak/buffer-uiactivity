@@ -11,6 +11,8 @@
 
 @interface FirstViewController : UIViewController
 
+@property(strong,nonatomic) UIPopoverController* popup;
+
 -(IBAction)openUIActivityView:(id)sender;
 -(IBAction)openBufferSheet:(id)sender;
 
