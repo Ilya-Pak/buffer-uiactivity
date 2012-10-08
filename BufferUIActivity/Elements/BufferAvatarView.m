@@ -43,32 +43,23 @@
     [avatarImage drawInRect:CGRectMake(1, 1, rect.size.width-2, rect.size.height-2)];
     
     UIImage *networkImage = nil;
+    NSString *networkIconPath;
     
-    if([[bufferProfile valueForKey:@"service"] isEqualToString:@"twitter"]){
-        networkImage = [UIImage imageNamed:@"twitter-icon.png"];
+    // Retina use 64px icons, else use 32px icons
+    if ([[UIScreen mainScreen] scale] == 2.0) {
+        networkIconPath = [NSString stringWithFormat:@"%@/%@-64", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"service"]];
+        
+    } else {
+        networkIconPath = [NSString stringWithFormat:@"%@/%@-32", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"service"]];
     }
     
-    if([[bufferProfile valueForKey:@"service"] isEqualToString:@"facebook"]){
-        networkImage = [UIImage imageNamed:@"facebook-icon.png"];
-    }
+    networkImage = [UIImage imageWithContentsOfFile:networkIconPath];
     
-    if([[bufferProfile valueForKey:@"service"] isEqualToString:@"gplus"]){
-        networkImage = [UIImage imageNamed:@"gplus-icon.png"];
-    }
-    
-    if([[bufferProfile valueForKey:@"service"] isEqualToString:@"linkedin"]){
-        networkImage = [UIImage imageNamed:@"linkedin-icon.png"];
-    }
-    
-    if([[bufferProfile valueForKey:@"service"] isEqualToString:@"appdotnet"]){
-        networkImage = [UIImage imageNamed:@"appdotnet-icon.png"];
-    }
-    
-    [networkImage drawInRect:CGRectMake(rect.size.width - 14, rect.size.height - 14, 13, 13)];
+    [networkImage drawInRect:CGRectMake(rect.size.width - 32, rect.size.height - 32, 32, 32)];
     
     self.layer.masksToBounds = YES;
-    self.layer.opaque = NO;
     self.layer.cornerRadius = 6.0f;
+    self.layer.opaque = NO;
 }
 
 
