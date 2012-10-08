@@ -70,11 +70,11 @@
     [self cacheNetworkIcons:configuration];
 }
 
--(void)removeCachedConfiguration {
+- (void)removeCachedConfiguration {
     [@[] writeToFile:[self cachedConfigurationPath] atomically:YES];
 }
 
--(void)cacheNetworkIcons:(NSMutableArray *)configuration {
+- (void)cacheNetworkIcons:(NSMutableArray *)configuration {
     
     NSArray *services = [configuration valueForKey:@"services"];
     
@@ -89,6 +89,5 @@
     }
     
 }
-
 
 @end

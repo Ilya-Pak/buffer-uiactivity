@@ -15,6 +15,11 @@
 
 - (NSMutableArray *)getCachedProfiles;
 - (void)cacheProfileList:(NSMutableArray *)profileList;
--(void)removeCachedProfiles;
+- (void)removeCachedProfiles;
+
+- (NSString *)cachedConfigurationPath;
+- (NSMutableArray *)getCachedConfiguration;
+- (void)cacheConfiguration:(NSMutableArray *)configuration;
+- (void)removeCachedConfiguration;
 
 @end
