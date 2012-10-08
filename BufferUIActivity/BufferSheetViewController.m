@@ -9,7 +9,7 @@
 #import "BufferSheetViewController.h"
 #import "ProfilesService.h"
 #import "PostUpdateService.h"
-#import "UIImageView+AFNetworking.h"
+#import "ConfigurationService.h"
 #import "TwitterText.h"
 #import "ProfileCell.h"
 #import "GTMOAuth2ViewControllerTouch.h"
@@ -17,7 +17,7 @@
 
 @implementation BufferSheetViewController
 
-@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache;
+@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache;
 @synthesize avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3;
 @synthesize profileSelectionActive;
 
@@ -46,6 +46,7 @@
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"buffer_accesstoken"]){
         [self performSelector:@selector(presentAuth) withObject:nil afterDelay:0.1];
     } else {
+        [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
         [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
     
@@ -191,6 +192,26 @@
         
         [self detectCharacterLimit];
         [bufferProfileSelectionTable reloadData];
+    }
+}
+
+
+#pragma mark - Get Configuration
+
+-(void)getConfiguration {
+    if([[bufferCache getCachedConfiguration] count] != 0){
+        self.bufferConfiguration = [bufferCache getCachedConfiguration];
+    }
+    
+    ConfigurationService *service = [[ConfigurationService alloc] init];
+    [service getConfigurationWithSender:self];
+}
+
+-(void)loadConfiguration:(NSMutableArray *)loaded_configuration {
+    if(![self.bufferConfiguration isEqualToArray: loaded_configuration]){
+        self.bufferConfiguration = loaded_configuration;
+        [bufferCache cacheConfiguration:self.bufferConfiguration];
+        [self updateAvatarStack];
     }
 }
 
