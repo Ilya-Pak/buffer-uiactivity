@@ -17,7 +17,7 @@
 
 @implementation BufferSheetViewController
 
-@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache;
+@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder;
 @synthesize avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3;
 @synthesize profileSelectionActive;
 
@@ -201,6 +201,9 @@
 -(void)getConfiguration {
     if([[bufferCache getCachedConfiguration] count] != 0){
         self.bufferConfiguration = [bufferCache getCachedConfiguration];
+        
+        // Set up for character count order.
+        [self loadConfiguration:self.bufferConfiguration];
     }
     
     ConfigurationService *service = [[ConfigurationService alloc] init];
@@ -223,9 +226,30 @@
         [serviceCharacterCounts addObject:(NSNumber *)[[services valueForKey:service] valueForKey:@"character_limit"]];
     }
     
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:serviceCharacterCounts
+    
+    
+    // Tidy this up!
+    NSDictionary *dataSourceDict = [NSDictionary dictionaryWithObjects:serviceCharacterCounts
                                                            forKeys:serviceNames];
     
+    NSSortDescriptor *scoreSort = [NSSortDescriptor sortDescriptorWithKey:@"COUNT" ascending:YES];
+    NSSortDescriptor *wordSort = [NSSortDescriptor sortDescriptorWithKey:@"SERVICE" ascending:NO];
+    NSArray *sorts = [NSArray arrayWithObjects:scoreSort, wordSort, nil];
+    
+    
+    NSMutableArray *unsortedArrayOfDict = [NSMutableArray array];
+    
+    for (NSString *word in dataSourceDict) {
+        NSString *score = [dataSourceDict objectForKey:word];
+        [unsortedArrayOfDict addObject: [NSDictionary dictionaryWithObjectsAndKeys:word, @"SERVICE", score, @"COUNT",  nil]];
+    }
+    
+    NSArray *sortedArrayOfDict = [unsortedArrayOfDict sortedArrayUsingDescriptors:sorts];
+    
+    NSDictionary *sortedDict = [sortedArrayOfDict valueForKeyPath:@"SERVICE"];
+    
+    NSLog(@"%@", sortedDict);
+    self.bufferCharacterCountOrder = (NSArray *)sortedDict;
     
 }
 
@@ -386,30 +410,33 @@
 
 
 #pragma mark - Character Counts
-// Character Limit
 -(void)detectCharacterLimit {
     // Loop through the character counts from smallest to biggest checking whether account is selected.
-    
-    
-    
-    
-    
-    if([self twitterAccountActive]){
-        bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
-        [bufferCharLabel setHidden:NO];
-    } else if([self appdotnetAccountActive]){
-        bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self appDotNetRemainingCharacterCount]];
-        [bufferCharLabel setHidden:NO];
-    } else {
-        [bufferCharLabel setHidden:YES];
+        
+    for (NSString *service in self.bufferCharacterCountOrder) {
+                
+        if([self isServiceAccountActive:service]){
+                        
+            if([service isEqualToString:@"twitter"]){
+                bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
+            } else {
+                bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:service]];
+            }
+            
+            [bufferCharLabel setHidden:NO];
+            
+            return;
+        }
     }
+    
+    [bufferCharLabel setHidden:YES];
 }
 
--(BOOL)twitterAccountActive {
+-(BOOL)isServiceAccountActive:(NSString *)service {
     for (NSString * profile_id in self.selectedProfiles) {
         for (NSMutableArray* profile in self.bufferProfiles) {
             if([[profile valueForKey:@"id"] isEqualToString:profile_id]){
-                if([[profile valueForKey:@"service"] isEqualToString:@"twitter"]){
+                if([[profile valueForKey:@"service"] isEqualToString:service]){
                     return TRUE;
                 }
             }
@@ -418,25 +445,21 @@
     return FALSE;
 }
 
--(BOOL)appdotnetAccountActive {
-    for (NSString * profile_id in self.selectedProfiles) {
-        for (NSMutableArray* profile in self.bufferProfiles) {
-            if([[profile valueForKey:@"id"] isEqualToString:profile_id]){
-                if([[profile valueForKey:@"service"] isEqualToString:@"appdotnet"]){
-                    return TRUE;
-                }
-            }
-        }
-    }
-    return FALSE;
-}
-
--(int)appDotNetRemainingCharacterCount {
-    int count = 256 - bufferTextView.text.length;
+-(int)remainingCharacterCountForService:(NSString *)service {
+    NSLog(@"config %@", [[self.bufferConfiguration valueForKey:@"services"] valueForKey:service]);
+    
+    
+    int service_character_limit = [[[[self.bufferConfiguration valueForKey:@"services"] valueForKey:service] valueForKey:@"character_limit"] intValue];
+    
+    NSLog(@"service %@", service);
+    NSLog(@"limit %d", service_character_limit);
+    
+    int count = service_character_limit - bufferTextView.text.length;
     return count;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    /*
     if([self twitterAccountActive]){
         if(![bufferTextView.text isEqualToString:@""]){
             bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
@@ -448,6 +471,7 @@
     } else {
         [bufferCharLabel setText:@""];
     }
+     */
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -462,6 +486,7 @@
 
 // Add to Buffer
 -(void)addUpdate {
+    /*
     if([self.selectedProfiles count] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Profiles Selected"
                                                         message: @"Select a profile to add this update to."
@@ -498,6 +523,7 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
+     */
 }
 
 -(void)updatePosted {
