@@ -213,6 +213,20 @@
         [bufferCache cacheConfiguration:self.bufferConfiguration];
         [self updateAvatarStack];
     }
+    
+    // Get services and load Character counts. Reiterate over them to order them smallest to biggest which we'll then use to activate the correct count.
+    NSMutableArray *services = [self.bufferConfiguration valueForKey:@"services"];
+    NSArray *serviceNames = [[self.bufferConfiguration valueForKey:@"services"] allKeys];
+    
+    NSMutableArray *serviceCharacterCounts = [[NSMutableArray alloc] init];
+    for(NSString *service in serviceNames){
+        [serviceCharacterCounts addObject:(NSNumber *)[[services valueForKey:service] valueForKey:@"character_limit"]];
+    }
+    
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:serviceCharacterCounts
+                                                           forKeys:serviceNames];
+    
+    
 }
 
 
@@ -374,6 +388,12 @@
 #pragma mark - Character Counts
 // Character Limit
 -(void)detectCharacterLimit {
+    // Loop through the character counts from smallest to biggest checking whether account is selected.
+    
+    
+    
+    
+    
     if([self twitterAccountActive]){
         bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
         [bufferCharLabel setHidden:NO];
