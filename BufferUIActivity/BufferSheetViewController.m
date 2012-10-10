@@ -250,9 +250,7 @@
     
     NSDictionary *sortedDict = [sortedArrayOfDict valueForKeyPath:@"SERVICE"];
     
-    NSLog(@"%@", sortedDict);
-    self.bufferCharacterCountOrder = (NSArray *)sortedDict;
-    
+    self.bufferCharacterCountOrder = (NSArray *)sortedDict;    
 }
 
 
