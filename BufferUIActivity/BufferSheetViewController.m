@@ -584,6 +584,7 @@
     bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 245);
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        // Need to get the keyboard size programatically and set the correct height of the profile selection view ideally.
         if(UIInterfaceOrientationIsPortrait(orientation)){
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 25,  500, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
@@ -597,7 +598,6 @@
             bufferSheetBackground.frame = CGRectMake(8, 25, 320 - 16, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 215, 320, 215);
         }
-        
         if(UIInterfaceOrientationIsLandscape(orientation)){
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 232, 5, 480 - 16, 128);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
