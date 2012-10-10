@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSMutableArray *bufferConfiguration;
 @property (strong, nonatomic) NSMutableArray *bufferProfiles;
 @property (strong, nonatomic) NSArray *bufferCharacterCountOrder;
+@property (strong, nonatomic) NSString *bufferActiveCharacterCount;
 @property (strong, nonatomic) IBOutlet UILabel *bufferCharLabel;
 @property (strong, nonatomic) IBOutlet UILabel *bufferProfileCountLabel;
 

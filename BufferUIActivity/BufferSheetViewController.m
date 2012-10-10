@@ -52,6 +52,8 @@
     
     [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
     
+    self.bufferActiveCharacterCount = @"";
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -423,6 +425,9 @@
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:service]];
             }
             
+            // Set the lowest service to use in textviewdidchange
+            self.bufferActiveCharacterCount = service;
+            
             [bufferCharLabel setHidden:NO];
             
             return;
@@ -446,32 +451,18 @@
 }
 
 -(int)remainingCharacterCountForService:(NSString *)service {
-    NSLog(@"config %@", [[self.bufferConfiguration valueForKey:@"services"] valueForKey:service]);
-    
-    
     int service_character_limit = [[[[self.bufferConfiguration valueForKey:@"services"] valueForKey:service] valueForKey:@"character_limit"] intValue];
-    
-    NSLog(@"service %@", service);
-    NSLog(@"limit %d", service_character_limit);
     
     int count = service_character_limit - bufferTextView.text.length;
     return count;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    /*
-    if([self twitterAccountActive]){
-        if(![bufferTextView.text isEqualToString:@""]){
-            bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
-        }
-    } else if([self appdotnetAccountActive]){
-        if(![bufferTextView.text isEqualToString:@""]){
-            bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self appDotNetRemainingCharacterCount]];
-        }
+    if([self.bufferActiveCharacterCount isEqualToString:@"twitter"]){
+        bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
     } else {
-        [bufferCharLabel setText:@""];
+        bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:self.bufferActiveCharacterCount]];
     }
-     */
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -486,7 +477,7 @@
 
 // Add to Buffer
 -(void)addUpdate {
-    /*
+    
     if([self.selectedProfiles count] == 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Profiles Selected"
                                                         message: @"Select a profile to add this update to."
@@ -501,14 +492,14 @@
                                               cancelButtonTitle: @"OK"
                                               otherButtonTitles: nil];
         [alert show];
-    } else if([self twitterAccountActive] && [TwitterText remainingCharacterCount:bufferTextView.text] < 0){
+    } else if([self.bufferActiveCharacterCount isEqualToString:@"twitter"] && [TwitterText remainingCharacterCount:bufferTextView.text] < 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Update too long"
                                                         message: @"Please reduce the number of characters."
                                                        delegate: self
                                               cancelButtonTitle: @"OK"
                                               otherButtonTitles: nil];
         [alert show];
-    } else if([self appdotnetAccountActive] && [self appDotNetRemainingCharacterCount] < 0){
+    } else if(![self.bufferActiveCharacterCount isEqualToString:@"twitter"] && [self remainingCharacterCountForService:self.bufferActiveCharacterCount] < 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Update too long"
                                                         message: @"Please reduce the number of characters."
                                                        delegate: self
@@ -523,7 +514,6 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
-     */
 }
 
 -(void)updatePosted {
