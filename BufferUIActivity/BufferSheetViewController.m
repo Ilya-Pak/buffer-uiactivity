@@ -517,7 +517,7 @@
     if([bufferUIActivityDelegate respondsToSelector: @selector(activityDidFinish:)]){
         [bufferUIActivityDelegate activityDidFinish:YES];
     }
-    [self dismissViewControllerAnimated:TRUE completion:^{}];
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 -(void)errorAddingUpdate:(NSString *)error {
