@@ -413,8 +413,7 @@
 
 #pragma mark - Character Counts
 -(void)detectCharacterLimit {
-    // Loop through the character counts from smallest to biggest checking whether account is selected.
-        
+    // Loop through the character counts from smallest to biggest checking whether a profile of that type is selected.
     for (NSString *service in self.bufferCharacterCountOrder) {
                 
         if([self isServiceAccountActive:service]){
@@ -425,11 +424,9 @@
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:service]];
             }
             
-            // Set the lowest service to use in textviewdidchange
+            // Set the smallest active account type as active character count
             self.bufferActiveCharacterCount = service;
-            
             [bufferCharLabel setHidden:NO];
-            
             return;
         }
     }
