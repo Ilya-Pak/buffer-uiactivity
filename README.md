@@ -26,7 +26,7 @@ A UIActivity for [Buffer](http://bufferapp.com). Add this UIActivity to your UIA
     }
     
     
-## Example Usage - Standalone
+## Example Usage - Standalone / iOS5
 
     NSString *text = @"Hello world http://bufferapp.com";
     
