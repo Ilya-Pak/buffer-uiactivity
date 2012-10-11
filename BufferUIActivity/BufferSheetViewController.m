@@ -418,13 +418,17 @@
                         
             if([service isEqualToString:@"twitter"]){
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
+                [bufferCharLabel setHidden:NO];
             } else {
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:service]];
+                if([self remainingCharacterCountForService:service] <= 140){
+                    [bufferCharLabel setHidden:NO];
+                }
             }
             
             // Set the smallest active account type as active character count
             self.bufferActiveCharacterCount = service;
-            [bufferCharLabel setHidden:NO];
+            
             return;
         }
     }
@@ -457,6 +461,11 @@
         bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
     } else {
         bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:self.bufferActiveCharacterCount]];
+        if([self remainingCharacterCountForService:self.bufferActiveCharacterCount] <= 140){
+            [bufferCharLabel setHidden:NO];
+        } else {
+            [bufferCharLabel setHidden:YES];
+        }
     }
 }
 
