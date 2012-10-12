@@ -55,5 +55,4 @@ Currently also depends on...
 * Better support for activity items.
 * Improved Error Handling.
 * Support for iPad.
-* Dismiss Activity Sheet.
 * Remove dependencies.
