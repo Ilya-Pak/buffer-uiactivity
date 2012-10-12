@@ -192,7 +192,7 @@
         
         [self updateAvatarStack];
         
-        [self detectCharacterLimit];
+        [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
         [bufferProfileSelectionTable reloadData];
     }
 }
@@ -329,7 +329,7 @@
     bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
     
     [bufferProfileSelectionTable reloadData];
-    [self detectCharacterLimit];
+    [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
     [self updateAvatarStack];
 }
 
@@ -423,6 +423,8 @@
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:service]];
                 if([self remainingCharacterCountForService:service] <= 140){
                     [bufferCharLabel setHidden:NO];
+                } else {
+                    [bufferCharLabel setHidden:YES];
                 }
             }
             
