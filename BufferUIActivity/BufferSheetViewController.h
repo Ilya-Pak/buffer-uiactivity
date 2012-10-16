@@ -18,7 +18,7 @@
 @property (strong, nonatomic) CachingMethods *bufferCache;
 @property (strong, nonatomic) IBOutlet UIView *bufferSheetContainer;
 @property (strong, nonatomic) IBOutlet UIView *bufferSheetErrorView;
-@property (strong, nonatomic) IBOutlet UILabel *bufferSheetErrorLabel;
+@property (strong, nonatomic) IBOutlet UITextView *bufferSheetErrorLabel;
 @property (strong, nonatomic) IBOutlet BufferSheetBackground *bufferSheetBackground;
 @property (strong, nonatomic) IBOutlet UIButton *bufferAddButton;
 @property (strong, nonatomic) IBOutlet UIScrollView *bufferTextViewContainer;

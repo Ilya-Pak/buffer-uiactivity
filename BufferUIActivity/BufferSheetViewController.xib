@@ -44,10 +44,10 @@
 					<object class="IBUILabel" id="590542483">
 						<reference key="NSNextResponder" ref="566905764"/>
 						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{0, 81}, {304, 22}}</string>
+						<string key="NSFrame">{{0, 61}, {304, 22}}</string>
 						<reference key="NSSuperview" ref="566905764"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="515534012"/>
+						<reference key="NSNextKeyView" ref="363872643"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -75,43 +75,6 @@
 						<object class="NSFont" key="IBUIFont" id="1062387202">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-					</object>
-					<object class="IBUILabel" id="515534012">
-						<reference key="NSNextResponder" ref="566905764"/>
-						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{0, 123}, {304, 22}}</string>
-						<reference key="NSSuperview" ref="566905764"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:328</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText"/>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41MDEyNjUwOTIzAA</bytes>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<object class="NSColor" key="IBUIShadowColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MSAwLjUAA</bytes>
-						</object>
-						<string key="IBUIShadowOffset">{0, 1}</string>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">1</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="167062734">
-							<int key="type">2</int>
-							<double key="pointSize">12</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="153109258">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -154,8 +117,15 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">BufferSheetButton.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="167062734"/>
-						<reference key="IBUIFont" ref="153109258"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="167062734">
+							<int key="type">2</int>
+							<double key="pointSize">12</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="95325964">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">12</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIImageView" id="1043849571">
 						<reference key="NSNextResponder" ref="566905764"/>
@@ -170,6 +140,44 @@
 						<object class="NSCustomResource" key="IBUIImage" id="1009923870">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">BufferSheetLogo.png</string>
+						</object>
+					</object>
+					<object class="IBUITextView" id="363872643">
+						<reference key="NSNextResponder" ref="566905764"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 91}, {264, 65}}</string>
+						<reference key="NSSuperview" ref="566905764"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41IDAAA</bytes>
+						</object>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIScrollEnabled">NO</bool>
+						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
+						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
+						<bool key="IBUIEditable">NO</bool>
+						<string key="IBUIText">Lorem ipsum</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<int key="IBUITextAlignment">1</int>
+						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIAutocapitalizationType">2</int>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">1</int>
+							<double key="pointSize">14</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">14</double>
+							<int key="NSfFlags">16</int>
 						</object>
 					</object>
 				</array>
@@ -585,7 +593,7 @@
 										<reference key="IBUIHighlightedBackgroundImage" ref="1048296961"/>
 										<reference key="IBUINormalBackgroundImage" ref="512649975"/>
 										<reference key="IBUIFontDescription" ref="167062734"/>
-										<reference key="IBUIFont" ref="153109258"/>
+										<reference key="IBUIFont" ref="95325964"/>
 									</object>
 									<object class="IBUIButton" id="23278239">
 										<reference key="NSNextResponder" ref="113909267"/>
@@ -626,7 +634,7 @@
 											<string key="NSResourceName">BufferSheetGreenButton.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="167062734"/>
-										<reference key="IBUIFont" ref="153109258"/>
+										<reference key="IBUIFont" ref="95325964"/>
 									</object>
 								</array>
 								<string key="NSFrame">{{9, 28}, {302, 190}}</string>
@@ -813,9 +821,9 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">bufferSheetErrorLabel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="515534012"/>
+						<reference key="destination" ref="363872643"/>
 					</object>
-					<int key="connectionID">202</int>
+					<int key="connectionID">205</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -910,10 +918,10 @@
 						<int key="objectID">139</int>
 						<reference key="object" ref="566905764"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="515534012"/>
 							<reference ref="1043849571"/>
 							<reference ref="415219012"/>
 							<reference ref="590542483"/>
+							<reference ref="363872643"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Buffer Sheet Error View</string>
@@ -1093,14 +1101,14 @@
 						<string key="objectName">Avatar 3</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">161</int>
-						<reference key="object" ref="515534012"/>
-						<reference key="parent" ref="566905764"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">124</int>
 						<reference key="object" ref="858723840"/>
 						<reference key="parent" ref="53798454"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">204</int>
+						<reference key="object" ref="363872643"/>
+						<reference key="parent" ref="566905764"/>
 					</object>
 				</array>
 			</object>
@@ -1119,7 +1127,6 @@
 				<string key="142.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="142.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="161.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="165.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="166.CustomClassName">BufferSheetBackground</string>
 				<string key="166.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1148,13 +1155,14 @@
 				<string key="181.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="182.CustomClassName">BufferAvatarView</string>
 				<string key="182.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="204.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">202</int>
+			<int key="maxID">205</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1240,7 +1248,7 @@
 						<string key="bufferProfileSelectionView">UIView</string>
 						<string key="bufferSheetBackground">BufferSheetBackground</string>
 						<string key="bufferSheetContainer">UIView</string>
-						<string key="bufferSheetErrorLabel">UILabel</string>
+						<string key="bufferSheetErrorLabel">UITextView</string>
 						<string key="bufferSheetErrorView">UIView</string>
 						<string key="bufferTextView">UITextView</string>
 						<string key="bufferTextViewContainer">UIScrollView</string>
@@ -1304,7 +1312,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="bufferSheetErrorLabel">
 							<string key="name">bufferSheetErrorLabel</string>
-							<string key="candidateClassName">UILabel</string>
+							<string key="candidateClassName">UITextView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="bufferSheetErrorView">
 							<string key="name">bufferSheetErrorView</string>
