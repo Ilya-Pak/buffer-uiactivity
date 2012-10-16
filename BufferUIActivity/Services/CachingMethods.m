@@ -57,8 +57,8 @@
 
 // Configuration
 - (NSString *)cachedConfigurationPath {
-	NSString *cachedProfileListPath = [[self offlineCachePath] stringByAppendingPathComponent:@"BufferCachedConfiguration.plist"];
-    return cachedProfileListPath;
+	NSString *cachedConfigurationPath = [[self offlineCachePath] stringByAppendingPathComponent:@"BufferCachedConfiguration.plist"];
+    return cachedConfigurationPath;
 }
 
 - (NSMutableArray *)getCachedConfiguration {
