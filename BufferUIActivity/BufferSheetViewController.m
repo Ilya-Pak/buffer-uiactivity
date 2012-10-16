@@ -201,7 +201,7 @@
 #pragma mark - Get Configuration
 
 -(void)getConfiguration {
-    if([[bufferCache getCachedConfiguration] count] != 0){
+    if([bufferCache getCachedConfiguration]){
         self.bufferConfiguration = [bufferCache getCachedConfiguration];
         
         // Set up for character count order.
@@ -212,7 +212,7 @@
     [service getConfigurationWithSender:self];
 }
 
--(void)loadConfiguration:(NSMutableArray *)loaded_configuration {
+-(void)loadConfiguration:(NSMutableArray *)loaded_configuration {    
     if(![self.bufferConfiguration isEqualToArray: loaded_configuration]){
         self.bufferConfiguration = loaded_configuration;
         [bufferCache cacheConfiguration:self.bufferConfiguration];
@@ -222,17 +222,22 @@
     // Get services and load Character counts. Reiterate over them to order them smallest to biggest which we'll then use to activate the correct count.
     NSMutableArray *services = [self.bufferConfiguration valueForKey:@"services"];
     NSArray *serviceNames = [[self.bufferConfiguration valueForKey:@"services"] allKeys];
-    
+    NSMutableArray *serviceTypeNames = [[NSMutableArray alloc] init];
     NSMutableArray *serviceCharacterCounts = [[NSMutableArray alloc] init];
+    
     for(NSString *service in serviceNames){
-        [serviceCharacterCounts addObject:(NSNumber *)[[services valueForKey:service] valueForKey:@"character_limit"]];
+        for(NSString *type in [[services valueForKey:service] valueForKey:@"types"]){
+            [serviceTypeNames addObject:[[[[[self.bufferConfiguration valueForKey:@"services"] valueForKey:service] valueForKey:@"types"] valueForKey:type] valueForKey:@"name"]];
+            [serviceCharacterCounts addObject:[[[[[self.bufferConfiguration valueForKey:@"services"] valueForKey:service] valueForKey:@"types"] valueForKey:type] valueForKey:@"character_limit"]];
+            
+        }
     }
     
     
-    
     // Tidy this up!
-    NSDictionary *dataSourceDict = [NSDictionary dictionaryWithObjects:serviceCharacterCounts
-                                                           forKeys:serviceNames];
+    NSDictionary *dataSourceDict = [NSDictionary dictionaryWithObjects:serviceCharacterCounts forKeys:serviceTypeNames];
+    
+    self.bufferCharacterCount = (NSMutableArray *)dataSourceDict;
     
     NSSortDescriptor *scoreSort = [NSSortDescriptor sortDescriptorWithKey:@"COUNT" ascending:YES];
     NSSortDescriptor *wordSort = [NSSortDescriptor sortDescriptorWithKey:@"SERVICE" ascending:NO];
@@ -250,7 +255,9 @@
     
     NSDictionary *sortedDict = [sortedArrayOfDict valueForKeyPath:@"SERVICE"];
     
-    self.bufferCharacterCountOrder = (NSArray *)sortedDict;    
+    self.bufferCharacterCountOrder = (NSArray *)sortedDict;
+    
+    [self detectCharacterLimit];
 }
 
 
@@ -416,7 +423,7 @@
                 
         if([self isServiceAccountActive:service]){
                         
-            if([service isEqualToString:@"twitter"]){
+            if([service isEqualToString:@"Twitter"]){
                 bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
                 [bufferCharLabel setHidden:NO];
             } else {
@@ -438,11 +445,11 @@
     [bufferCharLabel setHidden:YES];
 }
 
--(BOOL)isServiceAccountActive:(NSString *)service {
+-(BOOL)isServiceAccountActive:(NSString *)serviceType {
     for (NSString * profile_id in self.selectedProfiles) {
         for (NSMutableArray* profile in self.bufferProfiles) {
             if([[profile valueForKey:@"id"] isEqualToString:profile_id]){
-                if([[profile valueForKey:@"service"] isEqualToString:service]){
+                if([[profile valueForKey:@"formatted_service"] isEqualToString:serviceType]){
                     return TRUE;
                 }
             }
@@ -452,14 +459,14 @@
 }
 
 -(int)remainingCharacterCountForService:(NSString *)service {
-    int service_character_limit = [[[[self.bufferConfiguration valueForKey:@"services"] valueForKey:service] valueForKey:@"character_limit"] intValue];
+    int service_character_limit = [[self.bufferCharacterCount valueForKey:@"service"] intValue];
     
     int count = service_character_limit - bufferTextView.text.length;
     return count;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    if([self.bufferActiveCharacterCount isEqualToString:@"twitter"]){
+    if([self.bufferActiveCharacterCount isEqualToString:@"Twitter"]){
         bufferCharLabel.text = [NSString stringWithFormat:@"%d", [TwitterText remainingCharacterCount:bufferTextView.text]];
     } else {
         bufferCharLabel.text = [NSString stringWithFormat:@"%d", [self remainingCharacterCountForService:self.bufferActiveCharacterCount]];
@@ -505,7 +512,7 @@
                                               cancelButtonTitle: @"OK"
                                               otherButtonTitles: nil];
         [alert show];
-    } else if(![self.bufferActiveCharacterCount isEqualToString:@"twitter"] && [self remainingCharacterCountForService:self.bufferActiveCharacterCount] < 0){
+    } else if(![self.bufferActiveCharacterCount isEqualToString:@"Twitter"] && [self remainingCharacterCountForService:self.bufferActiveCharacterCount] < 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Update too long"
                                                         message: @"Please reduce the number of characters."
                                                        delegate: self
@@ -533,14 +540,8 @@
     bufferSheetErrorLabel.text = error;
     
     [bufferAddButton setHidden:NO];
-        
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:1.0];
-	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight
-						   forView:bufferSheetContainer
-							 cache:YES];
-	[bufferSheetBackground addSubview:bufferSheetErrorView];
-	[UIView commitAnimations];
+    
+    [bufferSheetBackground addSubview:bufferSheetErrorView];
 }
 
 
@@ -561,13 +562,7 @@
 }
 
 -(IBAction)errorDismissed:(id)sender {
-    [UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:1.0];
-	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft
-						   forView:bufferSheetContainer
-							 cache:YES];
 	[bufferSheetErrorView removeFromSuperview];
-	[UIView commitAnimations];
 }
 
 -(IBAction)addToBuffer:(id)sender {
