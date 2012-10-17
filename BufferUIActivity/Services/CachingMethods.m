@@ -74,20 +74,22 @@
     [@[] writeToFile:[self cachedConfigurationPath] atomically:YES];
 }
 
-- (void)cacheNetworkIcons:(NSMutableArray *)configuration {
+-(void)cacheNetworkIcons:(NSMutableArray *)configuration {
     
     NSArray *services = [configuration valueForKey:@"services"];
     
     for(NSString *service in services){
-        for (NSString *iconSize in [[[configuration valueForKey:@"services"] valueForKey:service] valueForKey:@"icons"]) {
-            
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[configuration valueForKey:@"services"] valueForKey:service] valueForKey:@"icons"] valueForKey:iconSize]]]];
-            
-            [UIImagePNGRepresentation(image) writeToFile:[[self offlineCachePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", service, iconSize]] atomically:YES];
+        for(NSString *type in [[services valueForKey:service] valueForKey:@"types"]){
+            for (NSString *iconSize in [[[[[configuration valueForKey:@"services"] valueForKey:service] valueForKey:@"types"] valueForKey:type] valueForKey:@"icons"]) {
+                
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[[[[configuration valueForKey:@"services"] valueForKey:service] valueForKey:@"types"] valueForKey:type] valueForKey:@"icons"] valueForKey:iconSize]]]];
+                
+                [UIImagePNGRepresentation(image) writeToFile:[[self offlineCachePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ %@", [[[[[configuration valueForKey:@"services"] valueForKey:service] valueForKey:@"types"] valueForKey:type] valueForKey:@"name"], iconSize]] atomically:YES];
+            }
         }
-        
     }
     
 }
+
 
 @end

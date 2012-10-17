@@ -47,10 +47,10 @@
     
     // Retina use 64px icons, else use 32px icons
     if ([[UIScreen mainScreen] scale] == 2.0) {
-        networkIconPath = [NSString stringWithFormat:@"%@/%@-64", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"service"]];
+        networkIconPath = [NSString stringWithFormat:@"%@/%@ 64", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"formatted_service"]];
         
     } else {
-        networkIconPath = [NSString stringWithFormat:@"%@/%@-32", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"service"]];
+        networkIconPath = [NSString stringWithFormat:@"%@/%@ 32", [bufferCache offlineCachePath], [bufferProfile valueForKey:@"formatted_service"]];
     }
     
     networkImage = [UIImage imageWithContentsOfFile:networkIconPath];
