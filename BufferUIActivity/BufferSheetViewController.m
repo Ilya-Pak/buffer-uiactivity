@@ -505,7 +505,7 @@
                                               cancelButtonTitle: @"OK"
                                               otherButtonTitles: nil];
         [alert show];
-    } else if([self.bufferActiveCharacterCount isEqualToString:@"twitter"] && [TwitterText remainingCharacterCount:bufferTextView.text] < 0){
+    } else if([self.bufferActiveCharacterCount isEqualToString:@"Twitter"] && [TwitterText remainingCharacterCount:bufferTextView.text] < 0){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Update too long"
                                                         message: @"Please reduce the number of characters."
                                                        delegate: self
