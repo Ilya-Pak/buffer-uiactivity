@@ -130,7 +130,7 @@
 					<object class="IBUIImageView" id="1043849571">
 						<reference key="NSNextResponder" ref="566905764"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{101, 10}, {100, 23}}</string>
+						<string key="NSFrame">{{102, 10}, {100, 23}}</string>
 						<reference key="NSSuperview" ref="566905764"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="415219012"/>
@@ -161,7 +161,7 @@
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
 						<string key="IBUIText">Lorem ipsum</string>
-						<object class="NSColor" key="IBUITextColor">
+						<object class="NSColor" key="IBUITextColor" id="873551312">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
@@ -531,10 +531,7 @@
 											<int key="NSColorSpace">1</int>
 											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 										</object>
-										<object class="NSColor" key="IBUINormalTitleShadowColor" id="873551312">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MC41AA</bytes>
-										</object>
+										<reference key="IBUINormalTitleShadowColor" ref="873551312"/>
 										<reference key="IBUIFontDescription" ref="290028083"/>
 										<reference key="IBUIFont" ref="1062387202"/>
 									</object>
