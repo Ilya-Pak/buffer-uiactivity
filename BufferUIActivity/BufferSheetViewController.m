@@ -459,7 +459,7 @@
 }
 
 -(int)remainingCharacterCountForService:(NSString *)service {
-    int service_character_limit = [[self.bufferCharacterCount valueForKey:@"service"] intValue];
+    int service_character_limit = [[self.bufferCharacterCount valueForKey:service] intValue];
     
     int count = service_character_limit - bufferTextView.text.length;
     return count;
