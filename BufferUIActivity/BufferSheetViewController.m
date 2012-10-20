@@ -26,7 +26,7 @@
     
     bufferTextView.backgroundColor = [UIColor clearColor];
     
-    //[bufferTextView becomeFirstResponder];
+    [bufferTextView becomeFirstResponder];
     
     profileSelectionActive = YES;
     
