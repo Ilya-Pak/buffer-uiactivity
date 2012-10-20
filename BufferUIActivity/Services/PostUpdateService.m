@@ -19,6 +19,8 @@
     
     NSString *formatted_update = [update_text encodeString:NSUTF8StringEncoding];
     
+    
+    // To disable shortening once posted to Buffer change shorten=true to shorten=false
     NSString *params = @"";
     if(now){
         params = [NSString stringWithFormat:@"text=%@&now=1&shorten=true&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
