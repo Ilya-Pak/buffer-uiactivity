@@ -31,7 +31,8 @@
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        if([[JSON valueForKey:@"status"] boolValue]){
+        
+        if([[JSON valueForKey:@"success"] boolValue]){
             [sender performSelector:@selector(updatePosted)];
         } else {
             [sender performSelector:@selector(errorAddingUpdate:) withObject:[JSON valueForKey:@"message"]];
