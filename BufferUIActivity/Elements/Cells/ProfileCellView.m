@@ -69,12 +69,9 @@
         UIColor *mainTextColor = [UIColor whiteColor];
         
         if([self.profileState isEqualToString:@"selected"]){
-            //mainTextColor = [UIColor darkGrayColor];
-        
             UIImage *state = nil;
             state = [UIImage imageNamed:@"profileCheckmark.png"];
             [state drawInRect:CGRectMake(rect.size.width - 40, (rect.size.height / 2) - 12, 30, 24)];
-            
         }
         
         [mainTextColor set];
