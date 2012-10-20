@@ -24,17 +24,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [bufferProfileSelectionView setHidden:YES];
-    
     bufferTextView.backgroundColor = [UIColor clearColor];
     
-    [bufferTextView becomeFirstResponder];
+    //[bufferTextView becomeFirstResponder];
     
     profileSelectionActive = YES;
     
     bufferCache = [[CachingMethods alloc] init];
     
+    self.bufferProfiles = [[NSMutableArray alloc] init];
+    self.bufferConfiguration = [[NSMutableDictionary alloc] init];
     self.selectedProfiles = [[NSMutableArray alloc] init];
     self.selectedProfilesIndexes = [[NSMutableArray alloc] init];
     
@@ -50,7 +49,6 @@
         [self performSelector:@selector(presentAuth) withObject:nil afterDelay:0.1];
     } else {
         [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
-        [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
 }
 
@@ -131,69 +129,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"tokenRetrieved" object:nil];
         
         [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
-        [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
 }
-
-
-#pragma mark - Get Profiles
-
--(void)getProfiles {
-    @autoreleasepool {
-        // Load Cached Profiles
-        if([self.bufferCache getCachedProfiles]){
-            self.bufferProfiles = [self.bufferCache getCachedProfiles];
-            [NSThread detachNewThreadSelector:@selector(loadBufferProfilesIntoView) toTarget:self withObject:nil];
-        }
-        
-        // Reload Profiles
-        ProfilesService *service = [[ProfilesService alloc] init];
-        [service getBufferProfiles:self];
-    }
-}
-
--(void)loadBufferProfiles:(NSMutableArray *)loaded_profiles {
-    if(![self.bufferProfiles isEqualToArray: loaded_profiles]){
-        self.bufferProfiles = loaded_profiles;
-        [bufferCache cacheProfileList:self.bufferProfiles];
-    }
-    [NSThread detachNewThreadSelector:@selector(loadBufferProfilesIntoView) toTarget:self withObject:nil];
-}
-
--(void)loadBufferProfilesIntoView {
-    @autoreleasepool {
-        
-        [self.selectedProfiles removeAllObjects];
-        [self.selectedProfilesIndexes removeAllObjects];
-        
-        // Select Default Profiles
-        for (int i = 0; i < self.bufferProfiles.count; i++) {
-            NSString *avatar = [[bufferProfiles objectAtIndex:i] valueForKey:@"avatar"];
-            
-            
-            NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [bufferCache offlineCachePath], [[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"]];
-            
-            BOOL avatarExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-            if(!avatarExists){
-                [bufferCache addAvatartoCacheforProfile:[[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"] fromURL:avatar];
-            }
-            
-            if([[[[self.bufferProfiles objectAtIndex:i] valueForKey:@"default"] stringValue] isEqualToString:@"1"]){
-                [self.selectedProfiles addObject:[[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"]];
-                [self.selectedProfilesIndexes addObject:[NSString stringWithFormat:@"%d", i]];
-            }
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
-            [self updateAvatarStack];
-            [self detectCharacterLimit];
-        });
-        
-        [bufferProfileSelectionTable reloadData];
-    }
-}
-
 
 #pragma mark - Get Configuration
 
@@ -215,7 +152,6 @@
     if(![self.bufferConfiguration isEqual: loaded_configuration]){
         self.bufferConfiguration = loaded_configuration;
         [bufferCache cacheConfiguration:self.bufferConfiguration];
-        [self updateAvatarStack];
     }
     
     // Get services and load Character counts. Reiterate over them to order them smallest to biggest which we'll then use to activate the correct count.
@@ -255,10 +191,69 @@
     
     self.bufferCharacterCountOrder = (NSArray *)sortedDict;
     
-    [self performSelectorOnMainThread:@selector(updateAvatarStack) withObject:nil waitUntilDone:NO];
-    [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
-    [bufferProfileSelectionTable reloadData];
+    [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
 }
+
+
+#pragma mark - Get Profiles
+
+-(void)getProfiles {
+    @autoreleasepool {
+        // Load Cached Profiles
+        if([self.bufferCache getCachedProfiles]){
+            self.bufferProfiles = [self.bufferCache getCachedProfiles];
+            [NSThread detachNewThreadSelector:@selector(loadBufferProfilesIntoView) toTarget:self withObject:nil];
+        }
+        
+        // Reload Profiles
+        ProfilesService *service = [[ProfilesService alloc] init];
+        [service getBufferProfiles:self];
+    }
+}
+
+-(void)loadBufferProfiles:(NSMutableArray *)loaded_profiles {
+    if(![self.bufferProfiles isEqualToArray: loaded_profiles]){
+        self.bufferProfiles = loaded_profiles;
+        [bufferCache cacheProfileList:self.bufferProfiles];
+        
+        [NSThread detachNewThreadSelector:@selector(loadBufferProfilesIntoView) toTarget:self withObject:nil];
+    }
+}
+
+-(void)loadBufferProfilesIntoView {
+    @autoreleasepool {
+        
+        [self.selectedProfiles removeAllObjects];
+        [self.selectedProfilesIndexes removeAllObjects];
+        
+        // Select Default Profiles
+        for (int i = 0; i < self.bufferProfiles.count; i++) {
+            NSString *avatar = [[bufferProfiles objectAtIndex:i] valueForKey:@"avatar"];
+            
+            
+            NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [bufferCache offlineCachePath], [[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"]];
+            
+            BOOL avatarExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+            if(!avatarExists){
+                [bufferCache addAvatartoCacheforProfile:[[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"] fromURL:avatar];
+            }
+            
+            if([[[[self.bufferProfiles objectAtIndex:i] valueForKey:@"default"] stringValue] isEqualToString:@"1"]){
+                [self.selectedProfiles addObject:[[self.bufferProfiles objectAtIndex:i] valueForKey:@"id"]];
+                [self.selectedProfilesIndexes addObject:[NSString stringWithFormat:@"%d", i]];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.bufferProfileSelectionTable reloadData];
+            bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
+            [self updateAvatarStack];
+            [self detectCharacterLimit];
+        });
+    }
+}
+
+
 
 
 // Profile Selection Table
@@ -277,7 +272,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ProfileCell";
     
     ProfileCell *profile_cell = (ProfileCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -337,7 +332,7 @@
     
     [self performSelectorOnMainThread:@selector(updateAvatarStack) withObject:nil waitUntilDone:NO];
     [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
-    [bufferProfileSelectionTable reloadData];
+    [self.bufferProfileSelectionTable reloadData];
 }
 
 -(void)updateAvatarStack {
@@ -348,6 +343,7 @@
         [avatarView1 setBufferProfile:nil];
         
         [UIView animateWithDuration:1 animations:^{
+            avatarView1.alpha = 0;
             avatarView2.alpha = 0;
             avatarView3.alpha = 0;
         }];
@@ -359,6 +355,7 @@
         [avatarView1 setBufferProfile:[self.bufferProfiles objectAtIndex:(NSInteger)[[self.selectedProfilesIndexes objectAtIndex:0] intValue]]];
         
         [UIView animateWithDuration:0.3 animations:^{
+            avatarView1.alpha = 1;
             avatarView2.alpha = 0;
             avatarView3.alpha = 0;
         } completion:^(BOOL finished) {
@@ -370,6 +367,7 @@
         [avatarView2 setBufferProfile:[self.bufferProfiles objectAtIndex:(NSInteger)[[self.selectedProfilesIndexes objectAtIndex:1] intValue]]];
         
         [UIView animateWithDuration:0.3 animations:^{
+            avatarView1.alpha = 1;
             avatarView2.alpha = 1;
             avatarView3.alpha = 0;
         } completion:^(BOOL finished) {
@@ -384,6 +382,7 @@
         [avatarView3 setBufferProfile:[self.bufferProfiles objectAtIndex:(NSInteger)[[self.selectedProfilesIndexes objectAtIndex:2] intValue]]];
         
         [UIView animateWithDuration:0.6 animations:^{
+            avatarView1.alpha = 1;
             avatarView2.alpha = 1;
             avatarView3.alpha = 1;
         }];
@@ -547,7 +546,6 @@
 #pragma mark - Button Actions
 
 -(IBAction)toggleProfileSelection:(id)sender {
-    [bufferProfileSelectionTable reloadData];
     [self toggleProfileSelection];
 }
 
@@ -581,7 +579,7 @@
 -(void)viewWillLayoutSubviews {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     [self rotateViewWithOrientation:orientation];
-    [bufferProfileSelectionTable reloadData];
+    [self.bufferProfileSelectionTable reloadData];
 }
 
 -(void)rotateViewWithOrientation:(UIInterfaceOrientation)orientation {
