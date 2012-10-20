@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     [bufferProfileSelectionView setHidden:YES];
     
     bufferTextView.backgroundColor = [UIColor clearColor];
@@ -34,14 +35,16 @@
     
     bufferCache = [[CachingMethods alloc] init];
     
-    if(bufferTextCopy){
-        bufferTextView.text = bufferTextCopy;
-    }
-    
     self.selectedProfiles = [[NSMutableArray alloc] init];
     self.selectedProfilesIndexes = [[NSMutableArray alloc] init];
     
-    [self updateAvatarStack];
+    if(bufferTextCopy){
+        bufferTextView.text = bufferTextCopy;
+    }
+        
+    [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
+    
+    self.bufferActiveCharacterCount = @"";
     
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"buffer_accesstoken"]){
         [self performSelector:@selector(presentAuth) withObject:nil afterDelay:0.1];
@@ -49,10 +52,6 @@
         [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
         [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
-    
-    [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
-    
-    self.bufferActiveCharacterCount = @"";
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -131,8 +130,8 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"tokenRetrieved" object:nil];
         
-        [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
         [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
     }
 }
 
@@ -141,11 +140,9 @@
 
 -(void)getProfiles {
     @autoreleasepool {
-        
         // Load Cached Profiles
-        self.bufferProfiles = [self.bufferCache getCachedProfiles];
-        
-        if([self.bufferProfiles isKindOfClass:[NSArray class]] && [self.bufferProfiles count] != 0){
+        if([self.bufferCache getCachedProfiles]){
+            self.bufferProfiles = [self.bufferCache getCachedProfiles];
             [NSThread detachNewThreadSelector:@selector(loadBufferProfilesIntoView) toTarget:self withObject:nil];
         }
         
@@ -187,11 +184,12 @@
             }
         }
         
-        bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
+            [self updateAvatarStack];
+            [self detectCharacterLimit];
+        });
         
-        [self updateAvatarStack];
-        
-        [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
         [bufferProfileSelectionTable reloadData];
     }
 }
@@ -257,9 +255,8 @@
     
     self.bufferCharacterCountOrder = (NSArray *)sortedDict;
     
-    [self detectCharacterLimit];
-    
-    [self updateAvatarStack];
+    [self performSelectorOnMainThread:@selector(updateAvatarStack) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
     [bufferProfileSelectionTable reloadData];
 }
 
@@ -338,9 +335,9 @@
     
     bufferProfileCountLabel.text = [NSString stringWithFormat:@"%d", [self.selectedProfiles count]];
     
-    [bufferProfileSelectionTable reloadData];
+    [self performSelectorOnMainThread:@selector(updateAvatarStack) withObject:nil waitUntilDone:NO];
     [self performSelectorOnMainThread:@selector(detectCharacterLimit) withObject:nil waitUntilDone:NO];
-    [self updateAvatarStack];
+    [bufferProfileSelectionTable reloadData];
 }
 
 -(void)updateAvatarStack {
@@ -550,6 +547,7 @@
 #pragma mark - Button Actions
 
 -(IBAction)toggleProfileSelection:(id)sender {
+    [bufferProfileSelectionTable reloadData];
     [self toggleProfileSelection];
 }
 
@@ -600,11 +598,19 @@
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
         }
     } else {
-        if(UIInterfaceOrientationIsPortrait(orientation)){            
-            bufferSheetBackground.frame = CGRectMake(8, 25, 320 - 16, 190);
+        if(UIInterfaceOrientationIsPortrait(orientation)){
+            avatar1Container.frame = CGRectMake(11, 49, 45, 45);
+            avatar2Container.frame = CGRectMake(13, 48, 45, 45);
+            avatar3Container.frame = CGRectMake(9, 48, 45, 45);
+            
+            bufferSheetBackground.frame = CGRectMake(9, 28, 302, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 215, 320, 215);
         }
         if(UIInterfaceOrientationIsLandscape(orientation)){
+            avatar1Container.frame = CGRectMake(16, 43, 45, 45);
+            avatar2Container.frame = CGRectMake(18, 43, 45, 45);
+            avatar3Container.frame = CGRectMake(14, 43, 45, 45);
+            
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 232, 5, 480 - 16, 128);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
         }
