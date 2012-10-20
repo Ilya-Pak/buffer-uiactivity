@@ -26,7 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *bufferProfileSelectionButton;
 @property (strong, nonatomic) IBOutlet UIView *bufferProfileSelectionView;
 @property (strong, nonatomic) IBOutlet UITableView *bufferProfileSelectionTable;
-@property (strong, nonatomic) NSMutableArray *bufferConfiguration;
+@property (strong, nonatomic) NSMutableDictionary *bufferConfiguration;
 @property (strong, nonatomic) NSMutableArray *bufferProfiles;
 @property (strong, nonatomic) NSArray *bufferCharacterCountOrder;
 @property (strong, nonatomic) NSMutableArray *bufferCharacterCount;

@@ -53,7 +53,6 @@
     [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
     
     self.bufferActiveCharacterCount = @"";
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -201,19 +200,21 @@
 #pragma mark - Get Configuration
 
 -(void)getConfiguration {
-    if([bufferCache getCachedConfiguration]){
-        self.bufferConfiguration = [bufferCache getCachedConfiguration];
+    @autoreleasepool {
+        if([bufferCache getCachedConfiguration]){
+            self.bufferConfiguration = [[bufferCache getCachedConfiguration] mutableCopy];
+            
+            // Set up for character count order.
+            [self loadConfiguration:self.bufferConfiguration];
+        }
         
-        // Set up for character count order.
-        [self loadConfiguration:self.bufferConfiguration];
+        ConfigurationService *service = [[ConfigurationService alloc] init];
+        [service getConfigurationWithSender:self];
     }
-    
-    ConfigurationService *service = [[ConfigurationService alloc] init];
-    [service getConfigurationWithSender:self];
 }
 
--(void)loadConfiguration:(NSMutableArray *)loaded_configuration {    
-    if(![self.bufferConfiguration isEqualToArray: loaded_configuration]){
+-(void)loadConfiguration:(NSMutableDictionary *)loaded_configuration {
+    if(![self.bufferConfiguration isEqual: loaded_configuration]){
         self.bufferConfiguration = loaded_configuration;
         [bufferCache cacheConfiguration:self.bufferConfiguration];
         [self updateAvatarStack];

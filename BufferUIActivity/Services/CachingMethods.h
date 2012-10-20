@@ -19,7 +19,7 @@
 
 - (NSString *)cachedConfigurationPath;
 - (NSMutableArray *)getCachedConfiguration;
-- (void)cacheConfiguration:(NSMutableArray *)configuration;
+- (void)cacheConfiguration:(NSMutableDictionary *)configuration;
 - (void)removeCachedConfiguration;
 
 @end

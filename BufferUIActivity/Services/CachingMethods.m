@@ -57,15 +57,18 @@
 
 // Configuration
 - (NSString *)cachedConfigurationPath {
-	NSString *cachedConfigurationPath = [[self offlineCachePath] stringByAppendingPathComponent:@"BufferCachedConfiguration.plist"];
+	NSString *cachedConfigurationPath = [[self offlineCachePath] stringByAppendingPathComponent:@"BufferCachedConfig.plist"];
     return cachedConfigurationPath;
 }
 
 - (NSMutableArray *)getCachedConfiguration {
-	return [[NSArray arrayWithContentsOfFile:[self cachedConfigurationPath]] mutableCopy];
+    NSMutableDictionary *configDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:[self cachedConfigurationPath]];
+    
+	return (NSMutableArray *)configDictionary;
 }
 
-- (void)cacheConfiguration:(NSMutableArray *)configuration {
+- (void)cacheConfiguration:(NSMutableDictionary *)configuration {
+    
 	[configuration writeToFile:[self cachedConfigurationPath] atomically:YES];
     [self cacheNetworkIcons:configuration];
 }
@@ -74,7 +77,7 @@
     [@[] writeToFile:[self cachedConfigurationPath] atomically:YES];
 }
 
--(void)cacheNetworkIcons:(NSMutableArray *)configuration {
+-(void)cacheNetworkIcons:(NSMutableDictionary *)configuration {
     
     NSArray *services = [configuration valueForKey:@"services"];
     
