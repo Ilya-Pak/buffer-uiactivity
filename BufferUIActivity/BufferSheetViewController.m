@@ -133,7 +133,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"tokenRetrieved" object:nil];
         
         [NSThread detachNewThreadSelector:@selector(getProfiles) toTarget:self withObject:nil];
-        
+        [NSThread detachNewThreadSelector:@selector(getConfiguration) toTarget:self withObject:nil];
     }
 }
 
@@ -233,7 +233,6 @@
         }
     }
     
-    
     // Tidy this up!
     NSDictionary *dataSourceDict = [NSDictionary dictionaryWithObjects:serviceCharacterCounts forKeys:serviceTypeNames];
     
@@ -258,6 +257,9 @@
     self.bufferCharacterCountOrder = (NSArray *)sortedDict;
     
     [self detectCharacterLimit];
+    
+    [self updateAvatarStack];
+    [bufferProfileSelectionTable reloadData];
 }
 
 
@@ -392,7 +394,6 @@
         [self rotateImage:avatar3Container duration:0.6 curve:0 degrees:-10];
     }
 }
-
 
 // This is defined in Math.h
 #define M_PI   3.14159265358979323846264338327950288   /* pi */
