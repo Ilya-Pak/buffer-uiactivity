@@ -12,7 +12,7 @@
 
 @implementation PostUpdateService
 
--(void)postUpdate:(NSString *)update_text forProfiles:(NSArray *)profiles sendNow:(BOOL)now withSender:(id)sender {
+-(void)postUpdate:(NSString *)update_text forProfiles:(NSArray *)profiles withShortening:(BOOL)shortening withSender:(id)sender {
     NSString *access_token = [[NSUserDefaults standardUserDefaults] stringForKey:@"buffer_accesstoken"];
     
     NSString *url = [NSString stringWithFormat:@"https://api.bufferapp.com/1/updates/create.json?access_token=%@", access_token];
@@ -22,10 +22,10 @@
     
     // To disable shortening once posted to Buffer change shorten=true to shorten=false
     NSString *params = @"";
-    if(now){
-        params = [NSString stringWithFormat:@"text=%@&now=1&shorten=true&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
-    } else {
+    if(shortening){
         params = [NSString stringWithFormat:@"text=%@&shorten=true&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
+    } else {
+        params = [NSString stringWithFormat:@"text=%@&shorten=false&profile_ids[]=%@", formatted_update, [profiles componentsJoinedByString:@"&profile_ids[]="]];
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];

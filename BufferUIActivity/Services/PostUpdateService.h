@@ -10,6 +10,6 @@
 
 @interface PostUpdateService : NSObject
 
--(void)postUpdate:(NSString *)update_text forProfiles:(NSArray *)profiles sendNow:(BOOL)now withSender:(id)sender;
+-(void)postUpdate:(NSString *)update_text forProfiles:(NSArray *)profiles withShortening:(BOOL)shortening withSender:(id)sender;
 
 @end
