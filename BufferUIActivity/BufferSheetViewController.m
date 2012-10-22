@@ -10,6 +10,7 @@
 #import "ProfilesService.h"
 #import "PostUpdateService.h"
 #import "ConfigurationService.h"
+#import "ShortenLinkService.h"
 #import "TwitterText.h"
 #import "ProfileCell.h"
 #import "GTMOAuth2ViewControllerTouch.h"
@@ -17,9 +18,12 @@
 
 @implementation BufferSheetViewController
 
-@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder;
-@synthesize avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3;
-@synthesize profileSelectionActive;
+// Add your Buffer Client ID and Secret Here
+static NSString *clientID = @"";
+static NSString *clientSecret = @"";
+static BOOL linkShorteningEnabled = YES;
+
+@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder, avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3, profileSelectionActive;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +43,9 @@
     
     if(bufferTextCopy){
         bufferTextView.text = bufferTextCopy;
+        if(linkShorteningEnabled){
+            [self shortenLinks];
+        }
     }
         
     [self performSelector:@selector(animateSheetIn) withObject:nil afterDelay:0.4];
@@ -73,9 +80,6 @@
 #pragma mark - Buffer OAuth
 
 -(GTMOAuth2Authentication *)authForBuffer {
-    // Add your Buffer Client ID and Secret Here
-    NSString *clientID = @"";
-    NSString *clientSecret = @"";
     
     NSURL *tokenURL = [NSURL URLWithString:@"https://api.bufferapp.com/1/oauth2/token.json"];
     
@@ -253,6 +257,42 @@
     }
 }
 
+
+#pragma mark - Shorten Links
+
+// Shorten Links
+-(void)shortenLinks {
+    TwitterTextEntity *entity = [[TwitterText URLsInText:bufferTextCopy] objectAtIndex:0];
+    NSRange r = entity.range;
+    NSString *link = [bufferTextView.text substringWithRange:r];
+    
+    self.bufferUnshortenedLink = link;
+    
+    bufferTextView.text = [bufferTextView.text stringByReplacingOccurrencesOfString:link withString:@"http://buff.ly/...."];
+    
+    ShortenLinkService *service = [[ShortenLinkService alloc] init];
+    [service shortenLink:link withSender:self];
+}
+
+-(void)replaceShortenedURL:(NSMutableDictionary *)shortened_url {
+    NSString *shortened = [NSString stringWithFormat:@"%@", [shortened_url valueForKey:@"shortened"]];
+    NSRange selectedRange = bufferTextView.selectedRange;
+    BOOL rangeAtEnd = (selectedRange.location == bufferTextView.text.length);
+    
+    bufferTextView.text = [bufferTextView.text stringByReplacingOccurrencesOfString:@"http://buff.ly/...." withString:shortened];
+    
+    if(rangeAtEnd){
+        bufferTextView.selectedRange = NSMakeRange(bufferTextView.text.length, 0);
+    } else {
+        bufferTextView.selectedRange = selectedRange;
+    }
+}
+
+-(void)shortenLinksFailed {
+    NSRange selectedRange = bufferTextView.selectedRange;
+    bufferTextView.text = [bufferTextView.text stringByReplacingOccurrencesOfString:@"http://buff.ly/...." withString:self.bufferUnshortenedLink];
+    bufferTextView.selectedRange = selectedRange;
+}
 
 
 
@@ -521,7 +561,7 @@
         [bufferAddButton setHidden:YES];
         
         PostUpdateService *service = [[PostUpdateService alloc] init];
-        [service postUpdate:bufferTextView.text forProfiles:self.selectedProfiles sendNow:FALSE withSender:self];
+        [service postUpdate:bufferTextView.text forProfiles:self.selectedProfiles withShortening:linkShorteningEnabled withSender:self];
         
         [self.navigationController popViewControllerAnimated:YES];
     }

@@ -20,6 +20,7 @@
 		94000DF11607990F00E432DD /* BufferAvatarShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DF01607990F00E432DD /* BufferAvatarShadow.m */; };
 		94000DF41607997300E432DD /* BufferAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DF31607997300E432DD /* BufferAvatarView.m */; };
 		94000E011608605800E432DD /* BufferSheetTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000E001608605700E432DD /* BufferSheetTextView.m */; };
+		9433560616355C2A00017BCE /* ShortenLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433560516355C2A00017BCE /* ShortenLinkService.m */; };
 		943F0DB41622F7F60039C224 /* ConfigurationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 943F0DB31622F7F60039C224 /* ConfigurationService.m */; };
 		94457776158A908A004C3B2E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94457775158A908A004C3B2E /* UIKit.framework */; };
 		94457778158A908A004C3B2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94457777158A908A004C3B2E /* Foundation.framework */; };
@@ -114,6 +115,8 @@
 		94000DF31607997300E432DD /* BufferAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferAvatarView.m; sourceTree = "<group>"; };
 		94000DFF1608605600E432DD /* BufferSheetTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetTextView.h; sourceTree = "<group>"; };
 		94000E001608605700E432DD /* BufferSheetTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetTextView.m; sourceTree = "<group>"; };
+		9433560416355C2A00017BCE /* ShortenLinkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortenLinkService.h; sourceTree = "<group>"; };
+		9433560516355C2A00017BCE /* ShortenLinkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortenLinkService.m; sourceTree = "<group>"; };
 		943F0DB21622F7F60039C224 /* ConfigurationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationService.h; sourceTree = "<group>"; };
 		943F0DB31622F7F60039C224 /* ConfigurationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationService.m; sourceTree = "<group>"; };
 		94457771158A908A004C3B2E /* BufferUIActivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BufferUIActivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +286,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		9433560216355C1500017BCE /* Shortening */ = {
+			isa = PBXGroup;
+			children = (
+				9433560416355C2A00017BCE /* ShortenLinkService.h */,
+				9433560516355C2A00017BCE /* ShortenLinkService.m */,
+			);
+			name = Shortening;
+			sourceTree = "<group>";
+		};
 		943F0DB61622F7FE0039C224 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +417,7 @@
 				94457966158AB31E004C3B2E /* Profiles */,
 				94457969158AB33B004C3B2E /* Post Update */,
 				943F0DB61622F7FE0039C224 /* Configuration */,
+				9433560216355C1500017BCE /* Shortening */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -687,6 +700,7 @@
 				94B4970A160A0A25002B19D5 /* AFXMLRequestOperation.m in Sources */,
 				94B4970B160A0A25002B19D5 /* UIImageView+AFNetworking.m in Sources */,
 				943F0DB41622F7F60039C224 /* ConfigurationService.m in Sources */,
+				9433560616355C2A00017BCE /* ShortenLinkService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,11 +800,15 @@
 		944577A4158A908A004C3B2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BufferUIActivity/BufferUIActivity-Prefix.pch";
 				INFOPLIST_FILE = "BufferUIActivity/BufferUIActivity-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -798,11 +816,15 @@
 		944577A5158A908A004C3B2E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Buffer, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Buffer, Inc.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BufferUIActivity/BufferUIActivity-Prefix.pch";
 				INFOPLIST_FILE = "BufferUIActivity/BufferUIActivity-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0848DAAD-9097-408D-8B8B-6BF780C31371";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0848DAAD-9097-408D-8B8B-6BF780C31371";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

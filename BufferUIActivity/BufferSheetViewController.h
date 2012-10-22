@@ -48,6 +48,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedProfilesIndexes;
 
 @property (strong, nonatomic) NSString *bufferTextCopy;
+@property (strong, nonatomic) NSString *bufferUnshortenedLink;
 
 @property (strong, nonatomic) UILabel *selectedProfileCount;
 
