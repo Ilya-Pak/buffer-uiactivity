@@ -12,6 +12,10 @@ A UIActivity for [Buffer](http://bufferapp.com). Add this UIActivity to your UIA
 3. Insert the Cliend ID and Client Secret into BufferSheetViewController.m.
 4. Load the UIActivityViewController like the example below with BufferUIActivity in the applicationActivities array or load the Buffer Sheet directly.
 
+## Important Note
+
+If you fork this repository to include your Client ID and Client Secret - ensure that your fork is PRIVATE so that your client secret is not published publicly.
+
 ## Example Usage - UIActivityViewController
 
     BufferUIActivity *bufferActivity = [[BufferUIActivity alloc] init];
