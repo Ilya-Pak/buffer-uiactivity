@@ -19,6 +19,8 @@
 @implementation BufferSheetViewController
 
 // Add your Buffer Client ID and Secret Here
+// REMEMBER your client secret should be kept SECRET. Do not
+// publish your client secret to a public github repository.
 static NSString *clientID = @"";
 static NSString *clientSecret = @"";
 static BOOL linkShorteningEnabled = YES;
