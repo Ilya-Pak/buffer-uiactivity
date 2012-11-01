@@ -81,7 +81,7 @@ static BOOL linkShorteningEnabled = YES;
         
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bufferProfileSelectionView.bounds
                                                        byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
-                                                             cornerRadii:CGSizeMake(10.0, 10.0)];
+                                                             cornerRadii:CGSizeMake(6.0, 6.0)];
         
         // Create the shape layer and set its path
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
