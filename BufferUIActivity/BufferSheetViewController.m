@@ -625,7 +625,7 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(void)rotateViewWithOrientation:(UIInterfaceOrientation)orientation {
-    bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 245);
+    bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         // Need to get the keyboard size programatically and set the correct height of the profile selection view ideally.
