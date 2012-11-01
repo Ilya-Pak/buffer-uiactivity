@@ -66,6 +66,35 @@ static BOOL linkShorteningEnabled = YES;
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = TRUE;
     self.view.backgroundColor = [UIColor clearColor];
+    
+    [bufferProfileSelectionView setHidden:YES];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        
+        bufferProfileSelectionTable.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
+        
+        if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
+            bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270,  500, 190);
+        }
+        if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+            bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 190);
+        }
+        
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bufferProfileSelectionView.bounds
+                                                       byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
+                                                             cornerRadii:CGSizeMake(10.0, 10.0)];
+        
+        // Create the shape layer and set its path
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = bufferProfileSelectionView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        
+        // Set the newly created shape layer as the mask for the image view's layer
+        bufferProfileSelectionView.layer.mask = maskLayer;
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [bufferProfileSelectionView setHidden:NO];
 }
 
 -(void)animateSheetIn {
@@ -596,9 +625,29 @@ static BOOL linkShorteningEnabled = YES;
 
 -(void)toggleProfileSelection {    
     if(profileSelectionActive){
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            [UIView animateWithDuration:0.3 animations:^{
+                if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
+                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 280,  500, 180);
+                }
+                if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 190);
+                }
+            }];
+        }
         [bufferTextView becomeFirstResponder];
         profileSelectionActive = NO;
     } else {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            [UIView animateWithDuration:0.3 animations:^{
+                if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
+                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 460,  500, 190);
+                }
+                if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 110, 500, 180);
+                }
+            }];
+        }
         [bufferTextView resignFirstResponder];
         profileSelectionActive = YES;
     }
@@ -628,16 +677,24 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(void)rotateViewWithOrientation:(UIInterfaceOrientation)orientation {
-    bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         if(UIInterfaceOrientationIsPortrait(orientation)){
-            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270,  500, 190);
-            bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
+            bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 255, 270,  510, 200);
+            bufferSheetBackground.frame = CGRectMake(5, 5,  500, 190);
+            if(self.profileSelectionActive){
+                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 460,  500, 190);
+            } else {
+                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 280,  500, 180);
+            }
         }
         if(UIInterfaceOrientationIsLandscape(orientation)){
-            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 190);
-            bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
+            bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 255, 100, 510, 200);
+            bufferSheetBackground.frame = CGRectMake(5, 5, 500, 190);
+            if(self.profileSelectionActive){
+                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 290, 500, 190);
+            } else {
+                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 110, 500, 180);
+            }
         }
     } else {
         if(UIInterfaceOrientationIsPortrait(orientation)){
@@ -645,6 +702,7 @@ static BOOL linkShorteningEnabled = YES;
             avatar2Container.frame = CGRectMake(13, 48, 45, 45);
             avatar3Container.frame = CGRectMake(9, 48, 45, 45);
             
+            bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 250);
             bufferSheetBackground.frame = CGRectMake(9, 28, 302, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 215, 320, 215);
         }
@@ -653,6 +711,7 @@ static BOOL linkShorteningEnabled = YES;
             avatar2Container.frame = CGRectMake(18, 43, 45, 45);
             avatar3Container.frame = CGRectMake(14, 43, 45, 45);
             
+            bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 130);
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 232, 5, 480 - 16, 128);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
         }
