@@ -24,7 +24,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextClipToRect(context, rect);
     
-    NSArray *colors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.0 alpha:0.5].CGColor, [UIColor colorWithWhite:0.0 alpha:1.0].CGColor, nil];
+    NSArray *colors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0.0 alpha:0.4].CGColor, [UIColor colorWithWhite:0.0 alpha:0.9].CGColor, nil];
     
     CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
