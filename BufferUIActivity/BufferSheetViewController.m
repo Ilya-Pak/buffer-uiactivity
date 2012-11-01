@@ -630,11 +630,11 @@ static BOOL linkShorteningEnabled = YES;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         // Need to get the keyboard size programatically and set the correct height of the profile selection view ideally.
         if(UIInterfaceOrientationIsPortrait(orientation)){
-            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 25,  500, 190);
+            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270,  500, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
         }
         if(UIInterfaceOrientationIsLandscape(orientation)){
-            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 10, 500, 190);
+            bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
         }
     } else {
