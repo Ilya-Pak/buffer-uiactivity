@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "BufferSheetBackground.h"
 #import "CachingMethods.h"
 #import "BufferAvatarView.h"

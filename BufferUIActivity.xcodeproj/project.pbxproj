@@ -20,6 +20,8 @@
 		94000DF11607990F00E432DD /* BufferAvatarShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DF01607990F00E432DD /* BufferAvatarShadow.m */; };
 		94000DF41607997300E432DD /* BufferAvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000DF31607997300E432DD /* BufferAvatarView.m */; };
 		94000E011608605800E432DD /* BufferSheetTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94000E001608605700E432DD /* BufferSheetTextView.m */; };
+		9404F07716428AC400B758C6 /* BufferSheetVignette.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404F07616428AC300B758C6 /* BufferSheetVignette.m */; };
+		9404F07F16429FCD00B758C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9404F07D16429FC200B758C6 /* QuartzCore.framework */; };
 		940E1BDC163E8D570073A563 /* BufferSheetProfileCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 940E1BDB163E8D570073A563 /* BufferSheetProfileCount.m */; };
 		940E1BE0163E8E2F0073A563 /* BufferProfileCountBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E1BDE163E8E2F0073A563 /* BufferProfileCountBG.png */; };
 		940E1BE1163E8E2F0073A563 /* BufferProfileCountBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 940E1BDF163E8E2F0073A563 /* BufferProfileCountBG@2x.png */; };
@@ -118,6 +120,9 @@
 		94000DF31607997300E432DD /* BufferAvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferAvatarView.m; sourceTree = "<group>"; };
 		94000DFF1608605600E432DD /* BufferSheetTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetTextView.h; sourceTree = "<group>"; };
 		94000E001608605700E432DD /* BufferSheetTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetTextView.m; sourceTree = "<group>"; };
+		9404F07516428AC300B758C6 /* BufferSheetVignette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetVignette.h; sourceTree = "<group>"; };
+		9404F07616428AC300B758C6 /* BufferSheetVignette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetVignette.m; sourceTree = "<group>"; };
+		9404F07D16429FC200B758C6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		940E1BDA163E8D570073A563 /* BufferSheetProfileCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferSheetProfileCount.h; sourceTree = "<group>"; };
 		940E1BDB163E8D570073A563 /* BufferSheetProfileCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferSheetProfileCount.m; sourceTree = "<group>"; };
 		940E1BDE163E8E2F0073A563 /* BufferProfileCountBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BufferProfileCountBG.png; sourceTree = "<group>"; };
@@ -241,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9404F07F16429FCD00B758C6 /* QuartzCore.framework in Frameworks */,
 				9478857615FF28A100F360D9 /* Security.framework in Frameworks */,
 				9478857415FF289400F360D9 /* SystemConfiguration.framework in Frameworks */,
 				94457776158A908A004C3B2E /* UIKit.framework in Frameworks */,
@@ -270,6 +276,8 @@
 				94B496EB1609F2A1002B19D5 /* BufferSheetErrorBackground.m */,
 				940E1BDA163E8D570073A563 /* BufferSheetProfileCount.h */,
 				940E1BDB163E8D570073A563 /* BufferSheetProfileCount.m */,
+				9404F07516428AC300B758C6 /* BufferSheetVignette.h */,
+				9404F07616428AC300B758C6 /* BufferSheetVignette.m */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -334,6 +342,7 @@
 		94457774158A908A004C3B2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9404F07D16429FC200B758C6 /* QuartzCore.framework */,
 				9478857515FF28A100F360D9 /* Security.framework */,
 				9478857315FF289400F360D9 /* SystemConfiguration.framework */,
 				94457775158A908A004C3B2E /* UIKit.framework */,
@@ -715,6 +724,7 @@
 				943F0DB41622F7F60039C224 /* ConfigurationService.m in Sources */,
 				9433560616355C2A00017BCE /* ShortenLinkService.m in Sources */,
 				940E1BDC163E8D570073A563 /* BufferSheetProfileCount.m in Sources */,
+				9404F07716428AC400B758C6 /* BufferSheetVignette.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
