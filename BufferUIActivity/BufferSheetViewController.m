@@ -30,6 +30,8 @@ static BOOL linkShorteningEnabled = YES;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor clearColor];
+    
     bufferTextView.backgroundColor = [UIColor clearColor];
     
     [bufferTextView becomeFirstResponder];
@@ -63,6 +65,7 @@ static BOOL linkShorteningEnabled = YES;
 
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = TRUE;
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 -(void)animateSheetIn {
@@ -628,7 +631,6 @@ static BOOL linkShorteningEnabled = YES;
     bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        // Need to get the keyboard size programatically and set the correct height of the profile selection view ideally.
         if(UIInterfaceOrientationIsPortrait(orientation)){
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270,  500, 190);
             bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 250, self.view.frame.size.width, 250);
