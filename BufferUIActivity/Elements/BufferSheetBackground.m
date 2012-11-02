@@ -36,7 +36,7 @@
     self.layer.cornerRadius = 12.0f;
     self.layer.borderWidth = 1.0f;
     self.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:1.0f].CGColor;
-    self.layer.shadowOpacity = 1.0f;
+    self.layer.shadowOpacity = 0.5f;
     self.layer.shadowOffset = CGSizeMake(0.0f, 3.0f);
     self.layer.shadowRadius = 5.0f;
     self.layer.shouldRasterize = YES;
