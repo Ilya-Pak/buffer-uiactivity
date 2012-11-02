@@ -65,6 +65,8 @@ static BOOL linkShorteningEnabled = YES;
 
 -(void)viewWillAppear:(BOOL)animated {
     
+    [bufferProfileSelectionView setHidden:NO];
+    
     if(bufferPresentingView){
         bufferPresentingViewOrientation = bufferPresentingView.interfaceOrientation;
         [bufferSheetBackgroundImage setImage:[self captureScreen]];
@@ -610,6 +612,7 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(void)updatePosted {
+    [bufferProfileSelectionView setHidden:YES];
     if([bufferUIActivityDelegate respondsToSelector: @selector(activityDidFinish:)]){
         [bufferUIActivityDelegate activityDidFinish:YES];
     }
@@ -670,6 +673,7 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(IBAction)cancel:(id)sender {
+    [bufferProfileSelectionView setHidden:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     if([bufferUIActivityDelegate respondsToSelector: @selector(activityDidFinish:)]){
         [bufferUIActivityDelegate activityDidFinish:YES];
