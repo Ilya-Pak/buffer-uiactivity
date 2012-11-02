@@ -25,10 +25,10 @@ static NSString *clientID = @"";
 static NSString *clientSecret = @"";
 static BOOL linkShorteningEnabled = YES;
 
-@synthesize bufferUIActivityDelegate, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder, avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3, profileSelectionActive;
+@synthesize bufferUIActivityDelegate, bufferPresentingView, bufferPresentingViewOrientation, bufferSheetBackgroundImage, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder, avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3, profileSelectionActive;
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     
     self.view.backgroundColor = [UIColor clearColor];
     
@@ -64,6 +64,12 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+    if(bufferPresentingView){
+        bufferPresentingViewOrientation = bufferPresentingView.interfaceOrientation;
+        [bufferSheetBackgroundImage setImage:[self captureScreen]];
+    }
+    
     self.navigationController.navigationBarHidden = TRUE;
     self.view.backgroundColor = [UIColor clearColor];
     
@@ -95,6 +101,12 @@ static BOOL linkShorteningEnabled = YES;
 
 -(void)viewDidAppear:(BOOL)animated {
     [bufferProfileSelectionView setHidden:NO];
+    
+    if(bufferPresentingView){
+        bufferPresentingViewOrientation = bufferPresentingView.interfaceOrientation;
+    
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 -(void)animateSheetIn {
@@ -644,7 +656,7 @@ static BOOL linkShorteningEnabled = YES;
                     bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 460,  500, 190);
                 }
                 if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 110, 500, 180);
+                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 250, 290, 500, 180);
                 }
             }];
         }
@@ -668,6 +680,55 @@ static BOOL linkShorteningEnabled = YES;
     }
 }
 
+#pragma mark - Capture Screen
+
+- (UIImage *) captureScreen {
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    CGRect rect = [keyWindow bounds];
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    if (![[UIApplication sharedApplication] isStatusBarHidden]) {
+        CGFloat statusBarOffset = -20.0f;
+        if ( UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication]statusBarOrientation]))
+        {
+            CGContextTranslateCTM(context,statusBarOffset, 0.0f);
+            
+        }else
+        {
+            CGContextTranslateCTM(context, 0.0f, statusBarOffset);
+        }
+    }
+    
+    [keyWindow.layer renderInContext:context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIImageOrientation imageOrientation;
+    switch ([UIApplication sharedApplication].statusBarOrientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+            imageOrientation = UIImageOrientationRight;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            imageOrientation = UIImageOrientationLeft;
+            break;
+        case UIInterfaceOrientationPortrait:
+            imageOrientation = UIImageOrientationUp;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            imageOrientation = UIImageOrientationDown;
+            break;
+        default:
+            break;
+    }
+    
+    UIImage *outputImage = [[UIImage alloc] initWithCGImage: image.CGImage
+                                                       scale: 1.0
+                                                 orientation: imageOrientation];
+    return outputImage;
+}
+
+
 #pragma mark - Orientation Changes
 
 -(void)viewWillLayoutSubviews {
@@ -677,6 +738,14 @@ static BOOL linkShorteningEnabled = YES;
 }
 
 -(void)rotateViewWithOrientation:(UIInterfaceOrientation)orientation {
+    if(bufferPresentingView){
+        if (orientation == bufferPresentingViewOrientation) {
+            bufferSheetBackgroundImage.alpha = 1.0f;
+        } else {
+            bufferSheetBackgroundImage.alpha = 0.0f;
+        }
+    }
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         if(UIInterfaceOrientationIsPortrait(orientation)){
             bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 255, 270,  510, 200);
@@ -717,6 +786,7 @@ static BOOL linkShorteningEnabled = YES;
         }
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

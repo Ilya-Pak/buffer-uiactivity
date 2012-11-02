@@ -15,6 +15,9 @@
 @interface BufferSheetViewController : UIViewController <UITextViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) id bufferUIActivityDelegate;
+@property (strong, nonatomic) UIViewController  *bufferPresentingView;
+@property (nonatomic) UIInterfaceOrientation bufferPresentingViewOrientation;
+@property (strong, nonatomic) IBOutlet UIImageView *bufferSheetBackgroundImage;
 
 @property (strong, nonatomic) CachingMethods *bufferCache;
 @property (strong, nonatomic) IBOutlet UIView *bufferSheetContainer;

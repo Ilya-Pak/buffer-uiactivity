@@ -67,6 +67,13 @@
     
     BufferSheetViewController *bufferSheet = [[BufferSheetViewController alloc] init];
     
+    // Set the sender as not highlighted (resolves issue where background screenshot would show button as highlighted).
+    [sender setHighlighted:NO];
+    
+    // Set this to show a "transparent" background showing the current view behind.
+    bufferSheet.bufferPresentingView = self;
+    
+    // Set the copy for the Buffer Composer
     bufferSheet.bufferTextCopy = text;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController: bufferSheet];
