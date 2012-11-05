@@ -99,6 +99,7 @@
 		94B4970B160A0A25002B19D5 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B49701160A0A25002B19D5 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		94EEE1D915C7F7FA00EF1AEC /* TwitterTextEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EEE1D615C7F7FA00EF1AEC /* TwitterTextEntity.m */; };
 		94EEE1DA15C7F7FA00EF1AEC /* TwitterText.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EEE1D715C7F7FA00EF1AEC /* TwitterText.m */; };
+		94FED9B91647BF6B00A174A0 /* BufferProfileSelectionBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FED9B81647BF6B00A174A0 /* BufferProfileSelectionBackground.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +240,8 @@
 		94EEE1D615C7F7FA00EF1AEC /* TwitterTextEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTextEntity.m; sourceTree = "<group>"; };
 		94EEE1D715C7F7FA00EF1AEC /* TwitterText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterText.m; sourceTree = "<group>"; };
 		94EEE1D815C7F7FA00EF1AEC /* TwitterTextEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTextEntity.h; sourceTree = "<group>"; };
+		94FED9B71647BF6B00A174A0 /* BufferProfileSelectionBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferProfileSelectionBackground.h; sourceTree = "<group>"; };
+		94FED9B81647BF6B00A174A0 /* BufferProfileSelectionBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BufferProfileSelectionBackground.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +281,8 @@
 				940E1BDB163E8D570073A563 /* BufferSheetProfileCount.m */,
 				9404F07516428AC300B758C6 /* BufferSheetVignette.h */,
 				9404F07616428AC300B758C6 /* BufferSheetVignette.m */,
+				94FED9B71647BF6B00A174A0 /* BufferProfileSelectionBackground.h */,
+				94FED9B81647BF6B00A174A0 /* BufferProfileSelectionBackground.m */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -725,6 +730,7 @@
 				9433560616355C2A00017BCE /* ShortenLinkService.m in Sources */,
 				940E1BDC163E8D570073A563 /* BufferSheetProfileCount.m in Sources */,
 				9404F07716428AC400B758C6 /* BufferSheetVignette.m in Sources */,
+				94FED9B91647BF6B00A174A0 /* BufferProfileSelectionBackground.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 //  BufferProfileSelectionBackground.h
 //  BufferUIActivity
 //
-//  Created by Andrew Yates on 01/11/2012.
+//  Created by Andrew Yates on 05/11/2012.
 //  Copyright (c) 2012 Andrew Yates. All rights reserved.
 //
 

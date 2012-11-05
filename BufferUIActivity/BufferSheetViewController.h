@@ -28,7 +28,9 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *bufferTextViewContainer;
 @property (strong, nonatomic) IBOutlet UITextView *bufferTextView;
 @property (strong, nonatomic) IBOutlet UIButton *bufferProfileSelectionButton;
+@property (strong, nonatomic) IBOutlet UIView *bufferProfileSelectionContainer;
 @property (strong, nonatomic) IBOutlet UIView *bufferProfileSelectionView;
+@property (strong, nonatomic) IBOutlet UIView *bufferProfileSelectionMask;
 @property (strong, nonatomic) IBOutlet UITableView *bufferProfileSelectionTable;
 @property (strong, nonatomic) NSMutableDictionary *bufferConfiguration;
 @property (strong, nonatomic) NSMutableArray *bufferProfiles;

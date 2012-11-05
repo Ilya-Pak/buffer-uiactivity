@@ -25,7 +25,7 @@ static NSString *clientID = @"";
 static NSString *clientSecret = @"";
 static BOOL linkShorteningEnabled = YES;
 
-@synthesize bufferUIActivityDelegate, bufferPresentingView, bufferPresentingViewOrientation, bufferSheetBackgroundImage, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionView, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder, avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3, profileSelectionActive;
+@synthesize bufferUIActivityDelegate, bufferPresentingView, bufferPresentingViewOrientation, bufferSheetBackgroundImage, bufferSheetContainer, bufferAddButton, bufferSheetErrorView, bufferSheetErrorLabel, bufferSheetBackground, bufferTextViewContainer, bufferTextView, bufferProfileSelectionContainer, bufferProfileSelectionView, bufferProfileSelectionMask, bufferProfileSelectionTable, bufferConfiguration, bufferProfiles, bufferCharLabel, bufferTextCopy, bufferProfileCountLabel, bufferCache, bufferCharacterCountOrder, avatar1Container, avatar2Container, avatar3Container, avatarView1, avatarView2, avatarView3, profileSelectionActive;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,7 +77,7 @@ static BOOL linkShorteningEnabled = YES;
     
     [bufferProfileSelectionView setHidden:YES];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        bufferProfileSelectionTable.contentInset = UIEdgeInsetsMake(15, 0, 0, 0);
+        bufferProfileSelectionTable.contentInset = UIEdgeInsetsMake(16, 0, 0, 0);
     }
 }
 
@@ -86,24 +86,9 @@ static BOOL linkShorteningEnabled = YES;
     
     if(bufferPresentingView){
         bufferPresentingViewOrientation = bufferPresentingView.interfaceOrientation;
-        
         self.view.backgroundColor = [UIColor whiteColor];
     } else {
         self.view.backgroundColor = [UIColor clearColor];
-    }
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bufferProfileSelectionView.bounds
-                                                       byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
-                                                             cornerRadii:CGSizeMake(6.0, 6.0)];
-        
-        // Create the shape layer and set its path
-        CAShapeLayer *maskLayer = [CAShapeLayer layer];
-        maskLayer.frame = bufferProfileSelectionView.bounds;
-        maskLayer.path = maskPath.CGPath;
-        
-        // Set the newly created shape layer as the mask for the image view's layer
-        bufferProfileSelectionView.layer.mask = maskLayer;
     }
 }
 
@@ -639,10 +624,10 @@ static BOOL linkShorteningEnabled = YES;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
             [UIView animateWithDuration:0.3 animations:^{
                 if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
-                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 270,  495, 180);
+                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270, 500, 180);
                 }
                 if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 90, 495, 180);
+                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 90, 500, 180);
                 }
             }];
         }
@@ -652,10 +637,10 @@ static BOOL linkShorteningEnabled = YES;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
             [UIView animateWithDuration:0.3 animations:^{
                 if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
-                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 450,  495, 220);
+                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 450, 500, 220);
                 }
                 if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-                    bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 285, 495, 220);
+                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 220);
                 }
             }];
         }
@@ -751,32 +736,40 @@ static BOOL linkShorteningEnabled = YES;
             bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 255, 270,  510, 200);
             bufferSheetBackground.frame = CGRectMake(5, 5,  500, 190);
             if(self.profileSelectionActive){
-                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 450,  495, 200);
+                bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 450,  500, 200);
+                bufferProfileSelectionView.frame = CGRectMake(5, 0,  490, 200);
+                bufferProfileSelectionTable.frame = CGRectMake(0, 0, bufferProfileSelectionView.frame.size.width, bufferProfileSelectionView.frame.size.height);
             } else {
-                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 280,  495, 180);
+                bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 280,  500, 180);
+                bufferProfileSelectionView.frame = CGRectMake(5, 0,  490, 180);
+                bufferProfileSelectionTable.frame = CGRectMake(0, 0, bufferProfileSelectionView.frame.size.width, bufferProfileSelectionView.frame.size.height);
             }
         }
         if(UIInterfaceOrientationIsLandscape(orientation)){
             bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 255, 100, 510, 200);
             bufferSheetBackground.frame = CGRectMake(5, 5, 500, 190);
             if(self.profileSelectionActive){
-                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 285, 495, 200);
+                bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 285,  500, 200);
+                bufferProfileSelectionView.frame = CGRectMake(0, 0, 500, 200);
+                bufferProfileSelectionTable.frame = CGRectMake(0, 0, bufferProfileSelectionView.frame.size.width, bufferProfileSelectionView.frame.size.height);
             } else {
-                bufferProfileSelectionView.frame = CGRectMake((self.view.frame.size.width/2) - 247, 110, 495, 180);
+                bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 110,  500, 200);
+                bufferProfileSelectionView.frame = CGRectMake(0, 0, 500, 180);
+                bufferProfileSelectionTable.frame = CGRectMake(0, 0, bufferProfileSelectionView.frame.size.width, bufferProfileSelectionView.frame.size.height);
             }
         }
         
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bufferProfileSelectionView.bounds
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bufferProfileSelectionMask.bounds
                                                        byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight
-                                                             cornerRadii:CGSizeMake(6.0, 6.0)];
+                                                             cornerRadii:CGSizeMake(12.0, 12.0)];
         
         // Create the shape layer and set its path
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
-        maskLayer.frame = bufferProfileSelectionView.bounds;
+        maskLayer.frame = bufferProfileSelectionMask.bounds;
         maskLayer.path = maskPath.CGPath;
         
         // Set the newly created shape layer as the mask for the image view's layer
-        bufferProfileSelectionView.layer.mask = maskLayer;
+        bufferProfileSelectionMask.layer.mask = maskLayer;
     } else {
         if(UIInterfaceOrientationIsPortrait(orientation)){
             avatar1Container.frame = CGRectMake(11, 49, 45, 45);
