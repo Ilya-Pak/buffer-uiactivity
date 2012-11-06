@@ -778,7 +778,7 @@ static BOOL linkShorteningEnabled = YES;
             
             bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 250);
             bufferSheetBackground.frame = CGRectMake(9, 28, 302, 190);
-            bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 215, 320, 215);
+            bufferProfileSelectionContainer.frame = CGRectMake(0, self.view.frame.size.height - 215, 320, 215);
         }
         if(UIInterfaceOrientationIsLandscape(orientation)){
             avatar1Container.frame = CGRectMake(16, 43, 45, 45);
@@ -787,7 +787,7 @@ static BOOL linkShorteningEnabled = YES;
             
             bufferSheetContainer.frame = CGRectMake(0, 0, self.view.frame.size.width, 130);
             bufferSheetBackground.frame = CGRectMake((self.view.frame.size.width/2) - 232, 5, 480 - 16, 128);
-            bufferProfileSelectionView.frame = CGRectMake(0, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
+            bufferProfileSelectionContainer.frame = CGRectMake(0, self.view.frame.size.height - 162, self.view.frame.size.width, 162);
         }
     }
 }

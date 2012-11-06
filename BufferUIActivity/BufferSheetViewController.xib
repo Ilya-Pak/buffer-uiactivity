@@ -230,7 +230,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIView" id="53798454">
 								<reference key="NSNextResponder" ref="415435292"/>
-								<int key="NSvFlags">277</int>
+								<int key="NSvFlags">274</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUIView" id="120653947">
 										<reference key="NSNextResponder" ref="53798454"/>
@@ -1342,10 +1342,20 @@
 					<string key="className">BufferSheetViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addToBuffer:">id</string>
+						<string key="cancel:">id</string>
 						<string key="errorDismissed:">id</string>
 						<string key="toggleProfileSelection:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addToBuffer:">
+							<string key="name">addToBuffer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancel:">
+							<string key="name">cancel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="errorDismissed:">
 							<string key="name">errorDismissed:</string>
 							<string key="candidateClassName">id</string>

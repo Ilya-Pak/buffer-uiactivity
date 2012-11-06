@@ -31,16 +31,18 @@
 
 
 - (void)drawBufferProfileViewBackground {
-    // Add a border and a shadow.
-    self.layer.borderWidth = 1.0f;
-    self.layer.borderColor = [UIColor colorWithRed:52.0/255.0 green:52.0/255.0 blue:52.0/255.0 alpha:1.0].CGColor;
-    self.layer.cornerRadius = 12.0f;
-    self.layer.shadowOpacity = 0.9f;
-    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    self.layer.shadowRadius = 5.0f;
-    self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        // Add a border and a shadow.
+        self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = [UIColor colorWithRed:52.0/255.0 green:52.0/255.0 blue:52.0/255.0 alpha:1.0].CGColor;
+        self.layer.cornerRadius = 12.0f;
+        self.layer.shadowOpacity = 0.9f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.layer.shadowRadius = 5.0f;
+        self.layer.shouldRasterize = YES;
+        self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
+    }
 }
 
 - (void)setFrame:(CGRect)frame {
