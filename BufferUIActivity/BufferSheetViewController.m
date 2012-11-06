@@ -624,10 +624,10 @@ static BOOL linkShorteningEnabled = YES;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
             [UIView animateWithDuration:0.3 animations:^{
                 if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
-                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270, 500, 180);
+                    bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 270, 500, 180);
                 }
                 if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 90, 500, 180);
+                    bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 90, 500, 180);
                 }
             }];
         }
@@ -637,10 +637,10 @@ static BOOL linkShorteningEnabled = YES;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
             [UIView animateWithDuration:0.3 animations:^{
                 if(UIDeviceOrientationIsPortrait(self.interfaceOrientation)){
-                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 450, 500, 220);
+                    bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 450, 500, 220);
                 }
                 if(UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
-                    bufferSheetContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 220);
+                    bufferProfileSelectionContainer.frame = CGRectMake((self.view.frame.size.width/2) - 250, 100, 500, 220);
                 }
             }];
         }
