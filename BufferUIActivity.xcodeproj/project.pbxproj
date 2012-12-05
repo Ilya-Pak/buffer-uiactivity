@@ -67,14 +67,6 @@
 		9478857215FF282A00F360D9 /* GTMHTTPFetcherLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 9478856F15FF282A00F360D9 /* GTMHTTPFetcherLogging.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9478857415FF289400F360D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9478857315FF289400F360D9 /* SystemConfiguration.framework */; };
 		9478857615FF28A100F360D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9478857515FF28A100F360D9 /* Security.framework */; };
-		947AF0AA15E67888009466EB /* appdotnet-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A215E67888009466EB /* appdotnet-icon.png */; };
-		947AF0AB15E67888009466EB /* appdotnet-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A315E67888009466EB /* appdotnet-icon@2x.png */; };
-		947AF0AC15E67888009466EB /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A415E67888009466EB /* facebook-icon.png */; };
-		947AF0AD15E67888009466EB /* facebook-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A515E67888009466EB /* facebook-icon@2x.png */; };
-		947AF0AE15E67888009466EB /* linkedin-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A615E67888009466EB /* linkedin-icon.png */; };
-		947AF0AF15E67888009466EB /* linkedin-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A715E67888009466EB /* linkedin-icon@2x.png */; };
-		947AF0B015E67888009466EB /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A815E67888009466EB /* twitter-icon.png */; };
-		947AF0B115E67888009466EB /* twitter-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 947AF0A915E67888009466EB /* twitter-icon@2x.png */; };
 		94B496CC1608BED1002B19D5 /* profileCheckmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B496CA1608BED1002B19D5 /* profileCheckmark.png */; };
 		94B496CD1608BED1002B19D5 /* profileCheckmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B496CB1608BED1002B19D5 /* profileCheckmark@2x.png */; };
 		94B496D11608C197002B19D5 /* BufferSheetProfileSelectionGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B496CF1608C197002B19D5 /* BufferSheetProfileSelectionGradient.png */; };
@@ -194,14 +186,6 @@
 		9478856F15FF282A00F360D9 /* GTMHTTPFetcherLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMHTTPFetcherLogging.m; sourceTree = "<group>"; };
 		9478857315FF289400F360D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9478857515FF28A100F360D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		947AF0A215E67888009466EB /* appdotnet-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appdotnet-icon.png"; sourceTree = "<group>"; };
-		947AF0A315E67888009466EB /* appdotnet-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appdotnet-icon@2x.png"; sourceTree = "<group>"; };
-		947AF0A415E67888009466EB /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-icon.png"; sourceTree = "<group>"; };
-		947AF0A515E67888009466EB /* facebook-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-icon@2x.png"; sourceTree = "<group>"; };
-		947AF0A615E67888009466EB /* linkedin-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkedin-icon.png"; sourceTree = "<group>"; };
-		947AF0A715E67888009466EB /* linkedin-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "linkedin-icon@2x.png"; sourceTree = "<group>"; };
-		947AF0A815E67888009466EB /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon.png"; sourceTree = "<group>"; };
-		947AF0A915E67888009466EB /* twitter-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-icon@2x.png"; sourceTree = "<group>"; };
 		94B496CA1608BED1002B19D5 /* profileCheckmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCheckmark.png; sourceTree = "<group>"; };
 		94B496CB1608BED1002B19D5 /* profileCheckmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCheckmark@2x.png"; sourceTree = "<group>"; };
 		94B496CF1608C197002B19D5 /* BufferSheetProfileSelectionGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BufferSheetProfileSelectionGradient.png; sourceTree = "<group>"; };
@@ -521,14 +505,6 @@
 				9478851F15FCCF2600F360D9 /* BufferIcon@2x.png */,
 				9478852115FCD60500F360D9 /* toolbar-profiles.png */,
 				9478852215FCD60500F360D9 /* toolbar-profiles@2x.png */,
-				947AF0A215E67888009466EB /* appdotnet-icon.png */,
-				947AF0A315E67888009466EB /* appdotnet-icon@2x.png */,
-				947AF0A415E67888009466EB /* facebook-icon.png */,
-				947AF0A515E67888009466EB /* facebook-icon@2x.png */,
-				947AF0A615E67888009466EB /* linkedin-icon.png */,
-				947AF0A715E67888009466EB /* linkedin-icon@2x.png */,
-				947AF0A815E67888009466EB /* twitter-icon.png */,
-				947AF0A915E67888009466EB /* twitter-icon@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -645,14 +621,6 @@
 				944577A0158A908A004C3B2E /* SecondViewController_iPad.xib in Resources */,
 				944577AE158A96DD004C3B2E /* BufferIcon.png in Resources */,
 				944577B5158AB178004C3B2E /* BufferSheetViewController.xib in Resources */,
-				947AF0AA15E67888009466EB /* appdotnet-icon.png in Resources */,
-				947AF0AB15E67888009466EB /* appdotnet-icon@2x.png in Resources */,
-				947AF0AC15E67888009466EB /* facebook-icon.png in Resources */,
-				947AF0AD15E67888009466EB /* facebook-icon@2x.png in Resources */,
-				947AF0AE15E67888009466EB /* linkedin-icon.png in Resources */,
-				947AF0AF15E67888009466EB /* linkedin-icon@2x.png in Resources */,
-				947AF0B015E67888009466EB /* twitter-icon.png in Resources */,
-				947AF0B115E67888009466EB /* twitter-icon@2x.png in Resources */,
 				9478852015FCCF2800F360D9 /* BufferIcon@2x.png in Resources */,
 				9478852315FCD60600F360D9 /* toolbar-profiles.png in Resources */,
 				9478852415FCD60600F360D9 /* toolbar-profiles@2x.png in Resources */,
